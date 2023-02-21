@@ -6,8 +6,10 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Post;
 use App\Models\Comment;
+use App\Models\User;
 use Database\Factories\PostFactory;
 use Database\Factories\CommentFactory;
+use Database\Factories\UserFactory;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,9 +26,14 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        Post::factory()
-        ->count(10)
-        ->has(Comment::factory()->count(2))
-        ->create();
+        // Post::factory()
+        // ->count(10)
+        // ->has(Comment::factory()->count(2))
+        // ->create();
+        $this->call(UserSeeder::class);
+        $this->call(PostSeeder::class);
+        $this->call(CommentSeeder::class);
+
+
     }
 }

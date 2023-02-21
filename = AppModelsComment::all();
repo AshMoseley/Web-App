@@ -1,0 +1,70 @@
+[90m= [39m[34;4mIlluminate\Database\Eloquent\Collection[39;24m {#4647
+    [34mall[39m: [
+      [34;4mApp\Models\Post[39;24m {#4649
+        [34mid[39m: [35m1[39m,
+        [34mtitle[39m: "[32mAssumenda quam id consequatur a veritatis ab fuga.[39m",
+        [34mbody[39m: """
+          [32mEnim cupiditate deleniti aut magni qui ea. Alias omnis aliquid inventore quo. Molestias similique rerum sed dolor consectetur repudiandae. Illum aliquam labore magnam illo nihil eius aut iusto.[39m\n
+          \n
+          [32mQui exercitationem consequatur nostrum omnis ut laboriosam ad. Laboriosam officiis autem provident quam consequatur amet ducimus. Inventore dicta dolor eius eveniet.[39m\n
+          \n
+          [32mIste ut pariatur beatae aut sunt laborum assumenda. Quo quia enim ut debitis inventore aperiam.[39m
+          """,
+        [34mcreated_at[39m: "[32m2023-02-21 03:12:32[39m",
+        [34mupdated_at[39m: "[32m2023-02-21 03:12:32[39m",
+      },
+      [34;4mApp\Models\Post[39;24m {#4650
+        [34mid[39m: [35m2[39m,
+        [34mtitle[39m: "[32mIn quidem quis perspiciatis voluptates ex totam dicta.[39m",
+        [34mbody[39m: """
+          [32mSit qui ut et nihil perspiciatis. Voluptates quas tempore est vero. Molestias maxime aspernatur vero inventore voluptatem et consequatur.[39m\n
+          \n
+          [32mEt maiores doloremque sequi voluptas eum. Soluta magni nesciunt aut perspiciatis qui quas error. Nam cupiditate et et iure. Quidem architecto nostrum ut ipsum adipisci qui aliquam.[39m\n
+          \n
+          [32mIpsum vel et qui provident aliquid. Perspiciatis placeat ducimus in vero laborum magnam. Adipisci aliquam ipsa et culpa dolorem quia. Dolorem qui repellat et quis est mollitia corporis.[39m
+          """,
+        [34mcreated_at[39m: "[32m2023-02-21 03:20:15[39m",
+        [34mupdated_at[39m: "[32m2023-02-21 03:20:15[39m",
+      },
+      [34;4mApp\Models\Post[39;24m {#4651
+        [34mid[39m: [35m3[39m,
+        [34mtitle[39m: "[32mAccusamus a ut distinctio harum et sed.[39m",
+        [34mbody[39m: """
+          [32mLibero sunt a sint adipisci quod. Et exercitationem tenetur voluptatem sunt. Ut non aut dolores nostrum quos assumenda ut nemo. Est nostrum iusto harum enim dignissimos. Et quo distinctio earum dolor.[39m\n
+          \n
+          [32mExpedita repudiandae doloribus ut. Accusantium consequatur illo et minima voluptatem ut. Iure enim molestias cumque. Sint atque debitis totam non doloremque voluptatem est.[39m\n
+          \n
+          [32mA atque id repellat reprehenderit aut aut. A est optio quas. Totam omnis et est non.[39m
+          """,
+        [34mcreated_at[39m: "[32m2023-02-21 03:25:52[39m",
+        [34mupdated_at[39m: "[32m2023-02-21 03:25:52[39m",
+      },
+      [34;4mApp\Models\Post[39;24m {#4652
+        [34mid[39m: [35m4[39m,
+        [34mtitle[39m: "[32mNon aut voluptate tempore.[39m",
+        [34mbody[39m: """
+          [32mLabore enim ratione eligendi et tenetur est itaque. Sunt impedit numquam quo error tenetur laudantium itaque. Labore molestiae rerum maxime nostrum commodi ut. Commodi dolores reprehenderit accusantium et inventore repellendus.[39m\n
+          \n
+          [32mVelit aut minima possimus rem natus. Dolorem dolor asperiores temporibus ducimus occaecati sed. Quas laboriosam et non facilis repellat exercitationem vel.[39m\n
+          \n
+          [32mAd dolor assumenda ut eos debitis. Corrupti pariatur ab asperiores cupiditate nobis vitae placeat.[39m
+          """,
+        [34mcreated_at[39m: "[32m2023-02-21 03:30:03[39m",
+        [34mupdated_at[39m: "[32m2023-02-21 03:30:03[39m",
+      },
+      [34;4mApp\Models\Post[39;24m {#4653
+        [34mid[39m: [35m5[39m,
+        [34mtitle[39m: "[32mNemo molestias dignissimos recusandae omnis est maiores qui distinctio.[39m",
+        [34mbody[39m: """
+          [32mVelit ullam optio ex necessitatibus voluptatum. Sint deserunt nostrum voluptatem similique. Corporis consectetur quia eius consequuntur.[39m\n
+          \n
+          [32mVoluptatem nesciunt totam quia iste commodi dolores. Quas sequi voluptatem quisquam ut beatae vero. Nihil est beatae ut sit corporis. Adipisci omnis eveniet quia cumque voluptas eveniet ratione. Consequatur velit voluptatem necessitatibus itaque ut voluptas.[39m\n
+          \n
+          [32mVoluptas autem dolor esse odit et in quidem. Similique deserunt quis ipsam quae optio.[39m
+          """,
+        [34mcreated_at[39m: "[32m2023-02-21 03:35:56[39m",
+        [34mupdated_at[39m: "[32m2023-02-21 03:35:56[39m",
+      },
+    ],
+  }
+

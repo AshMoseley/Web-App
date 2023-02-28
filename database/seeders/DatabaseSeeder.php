@@ -10,6 +10,7 @@ use App\Models\User;
 use Database\Factories\PostFactory;
 use Database\Factories\CommentFactory;
 use Database\Factories\UserFactory;
+use Database\Factories\TagFactory;
 
 class DatabaseSeeder extends Seeder
 {
@@ -33,6 +34,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(PostSeeder::class);
         $this->call(CommentSeeder::class);
+        $this->call(TagSeeder::class);
 
 
     }

@@ -11,6 +11,7 @@ use Database\Factories\PostFactory;
 use Database\Factories\CommentFactory;
 use Database\Factories\UserFactory;
 use Database\Factories\TagFactory;
+use Database\Factories\ProfileFactory;
 
 class DatabaseSeeder extends Seeder
 {
@@ -35,6 +36,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PostSeeder::class);
         $this->call(CommentSeeder::class);
         $this->call(TagSeeder::class);
+        $this->call(ProfileSeeder::class);
 
 
     }

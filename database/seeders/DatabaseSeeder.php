@@ -22,22 +22,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-        // Post::factory()
-        // ->count(10)
-        // ->has(Comment::factory()->count(2))
-        // ->create();
         $this->call(UserSeeder::class);
         $this->call(PostSeeder::class);
         $this->call(CommentSeeder::class);
         $this->call(TagSeeder::class);
         $this->call(ProfileSeeder::class);
-
-
     }
 }

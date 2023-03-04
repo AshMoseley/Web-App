@@ -16,6 +16,7 @@ class ProfileSeeder extends Seeder
      */
     public function run()
     {
+        // Create 10 user profiles
         Profile::factory()
         ->count(5) 
         ->create();

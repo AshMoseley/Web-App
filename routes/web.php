@@ -1,10 +1,9 @@
 <?php
 
-use App\Http\Controllers\ContactController;
+// use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ForumController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SearchController;
-use App\Http\Controllers\ThreadController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,23 +22,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Home
-Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Forum
 Route::get('/forum', [ForumController::class, 'index'])->name('forum.index');
 
 // post
-Route::get('/forum/{forum}/thread', [ThreadController::class, 'index'])->name('posts.index');
-Route::get('/forum/{forum}/thread/create', [ThreadController::class, 'create'])->name('posts.create');
-Route::post('/forum/{forum}/thread', [ThreadController::class, 'store'])->name('posts.store');
-Route::get('/forum/{forum}/thread/{thread}', [ThreadController::class, 'show'])->name('posts.show');
+Route::get('/forum/{forum}/post', [PostController::class, 'index'])->name('posts.index');
+Route::get('/forum/{forum}/post/create', [PostController::class, 'create'])->name('posts.create');
+Route::post('/forum/{forum}/post', [PostController::class, 'store'])->name('posts.store');
+Route::get('/forum/{forum}/post/{post}', [PostController::class, 'show'])->name('posts.show');
 
 // Reply
-Route::post('/forum/{forum}/thread/{thread}/reply', [ThreadController::class, 'reply'])->name('thread.reply');
-Route::get('/forum/{forum}/thread/{thread}/reply/{reply}/edit', [ThreadController::class, 'editReply'])->name('thread.editReply');
-Route::put('/forum/{forum}/thread/{thread}/reply/{reply}', [ThreadController::class, 'updateReply'])->name('thread.updateReply');
-Route::delete('/forum/{forum}/thread/{thread}/reply/{reply}', [ThreadController::class, 'destroyReply'])->name('thread.destroyReply');
+Route::post('/forum/{forum}/post/{post}/reply', [PostController::class, 'reply'])->name('thread.reply');
+Route::get('/forum/{forum}/post/{post}/reply/{reply}/edit', [PostController::class, 'editReply'])->name('thread.editReply');
+Route::put('/forum/{forum}/post/{post}/reply/{reply}', [PostController::class, 'updateReply'])->name('thread.updateReply');
+Route::delete('/forum/{forum}/post/{post}/reply/{reply}', [PostController::class, 'destroyReply'])->name('thread.destroyReply');
 
 // profile
 Route::get('/dashboard', function () {
@@ -56,6 +53,6 @@ Route::middleware('auth')->group(function () {
 Route::get('/search', [SearchController::class, 'index'])->name('search.index');
 
 // Contact
-Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+// Route::get('/contact', [ContactController::class, 'create'])->name('contact.create');
+// Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 require __DIR__.'/auth.php';

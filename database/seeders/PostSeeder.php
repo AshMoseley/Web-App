@@ -18,7 +18,7 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
-        // Creates a post that has 2 comments, as well as 3 tags
+        // Creates 10 posts that has 2 comments, as well as 3 tags
         Post::factory()
         ->count(10)
         ->has(Comment::factory()->count(2))

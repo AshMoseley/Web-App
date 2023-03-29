@@ -1,5 +1,5 @@
 <!-- home.blade.php -->
-@extends('layouts.app-new')
+@extends('layouts.app')
 
 @section('title', 'Home')
 

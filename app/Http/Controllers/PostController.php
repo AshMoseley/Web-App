@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Forum;
 
 class PostController extends Controller
 {
@@ -95,13 +96,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Forum $forum, Post $post)
     {
         $post->title = $request->title;
         $post->body = $request->body;
         $post->save();
-
-        return redirect()->route('posts.show', [$post->forum, $post]);
+    
+        return redirect()->route('posts.show', [$forum, $post]);
     }
 
     /**

@@ -7,7 +7,7 @@
                 <h1>{{ $forum->name }}</h1>
                 <p>{{ $forum->description }}</p>
                 <hr>
-                @foreach($forum->posts as $posts)
+                @foreach($forum->posts as $post)
                     <div class="card mb-3">
                         <div class="card-body">
                             <h2><a href="{{ route('post.show', [$forum, $post]) }}">{{ $post->title }}</a></h2>

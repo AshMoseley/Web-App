@@ -7,11 +7,11 @@
                 <h1>{{ $forum->name }}</h1>
                 <p>{{ $forum->description }}</p>
                 <hr>
-                @foreach($forum->threads as $thread)
+                @foreach($forum->posts as $posts)
                     <div class="card mb-3">
                         <div class="card-body">
-                            <h2><a href="{{ route('thread.show', [$forum, $thread]) }}">{{ $thread->title }}</a></h2>
-                            <p>{{ $thread->body }}</p>
+                            <h2><a href="{{ route('post.show', [$forum, $post]) }}">{{ $post->title }}</a></h2>
+                            <p>{{ $post->body }}</p>
                         </div>
                     </div>
                 @endforeach

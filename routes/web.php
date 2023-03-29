@@ -5,6 +5,7 @@ use App\Http\Controllers\ForumController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,13 +19,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('home');
+// });
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
 
 
 // Forum
 Route::get('/forum', [ForumController::class, 'index'])->name('forum.index');
+Route::get('/forums/{forum}', [ForumController::class, 'show'])->name('forum.show');
 
 // post
 Route::get('/forum/{forum}/post', [PostController::class, 'index'])->name('posts.index');

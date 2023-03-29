@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Forum;
 
-class ForumController extends Controller
+class HomeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +13,7 @@ class ForumController extends Controller
      */
     public function index()
     {
-        $forums = Forum::all();
-
-        return view('forums.index', ['forums'=>$forums]);
+        return view ('home');
     }
 
     /**
@@ -26,7 +23,7 @@ class ForumController extends Controller
      */
     public function create()
     {
-        return view('forums.create');
+        //
     }
 
     /**
@@ -37,17 +34,7 @@ class ForumController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|max:255',
-            'description' => 'required',
-        ]);
-
-        $forum = new Forum;
-        $forum->name = $validatedData['name'];
-        $forum->description = $validatedData['description'];
-        $forum->save();
-
-        return redirect()->route('forum.index');
+        //
     }
 
     /**
@@ -56,9 +43,9 @@ class ForumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Forum $forum)
+    public function show($id)
     {
-        return view('forums.show', compact('forum'));
+        //
     }
 
     /**
@@ -67,9 +54,9 @@ class ForumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Forum $forum)
+    public function edit($id)
     {
-        return view('forums.edit', compact('forum'));
+        //
     }
 
     /**
@@ -79,18 +66,9 @@ class ForumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Forum $forum)
+    public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|max:255',
-            'description' => 'required',
-        ]);
-
-        $forum->name = $validatedData['name'];
-        $forum->description = $validatedData['description'];
-        $forum->save();
-
-        return redirect()->route('forum.show', $forum);
+        //
     }
 
     /**
@@ -99,10 +77,8 @@ class ForumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Forum $forum)
+    public function destroy($id)
     {
-        $forum->delete();
-
-        return redirect()->route('forum.index');
+        //
     }
 }

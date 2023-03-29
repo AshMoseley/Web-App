@@ -11,6 +11,12 @@ class Post extends Model
 
     protected $fillable = ['title', 'body'];
 
+
+    public function forum()
+    {
+        return $this->belongsTo(Forum::class);
+    }
+    
     public function comments()
     {
         return $this->hasMany(Comment::class);

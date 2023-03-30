@@ -61,6 +61,16 @@
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
+
+                        @if(auth()->user() && auth()->user()->id == $comment->user_id)
+                         <a href="{{ route('comments.edit', ['forum' => $forum->slug, 'post' => $post->slug, 'comment' => $comment->id]) }}" class="btn btn-primary">Edit</a>
+                         <form action="{{ route('comments.destroy', ['forum' => $forum->slug, 'post' => $post->slug, 'comment' => $comment->id]) }}" method="post" style="display:inline-block;">
+                         @csrf
+                         @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                    @endif
+
                     </div>
                 </div>
             </div>

@@ -8,7 +8,7 @@
                     <div class="card-header">{{ __('Edit Comment') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('posts.updateComment', [$post, $comment]) }}">
+                    <form method="POST" action="{{ route('comments.update', ['forum' => $post->forum->id, 'post' => $post->id, 'comment' => $comment->id]) }}">
                             @csrf
                             @method('PUT')
 

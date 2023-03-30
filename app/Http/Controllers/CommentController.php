@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Comment;
+use App\Models\Forum;
 
 class CommentController extends Controller
 {
@@ -13,7 +14,7 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Comment $comment)
+    public function index(Post $post)
     {
         $comments = $post->comments()->get();
         return view('comments.index', compact('comments', 'post'));
@@ -24,19 +25,9 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request, Post $post)
+    public function create(Post $post)
     {
-        $validatedData = $request->validate([
-            'body' => 'required|string',
-        ]);
-    
-        $comment = new Comment;
-        $comment->body = $validatedData['body'];
-        $comment->user_id = auth()->user()->id;
-        $post->comments()->save($comment);
-    
-        return redirect()->route('posts.show', [$post])->with('success', 'Comment added successfully!');
-    }
+        return view('comments.create', compact('post'));
     }
 
     /**
@@ -45,19 +36,25 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Post $post, Request $request)
+    public function store(Request $request, Forum $forum, Post $post)
     {
+        // Ensure the post belongs to the forum
+        if ($post->forum_id != $forum->id) {
+            abort(404);
+        }
+    
         $validatedData = $request->validate([
             'body' => 'required|string',
         ]);
-
+    
         $comment = new Comment;
         $comment->body = $validatedData['body'];
         $comment->user_id = auth()->user()->id;
         $post->comments()->save($comment);
-
+    
         return redirect()->back()->with('success', 'Comment added successfully!');
     }
+    
 
     /**
      * Display the specified resource.
@@ -78,9 +75,14 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post, Comment $comment)
+    public function edit(Forum $forum, Post $post, Comment $comment)
     {
-        return view('posts.edit-comment', compact('post', 'comment'));
+        // Ensure the comment belongs to the post
+        if ($comment->post_id != $post->id) {
+            abort(404);
+        }
+    
+        return view('comments.edit', compact('forum', 'post', 'comment'));
     }
 
     /**
@@ -90,16 +92,26 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post, Comment $comment)
+    public function update(Request $request, Forum $forum, Post $post, Comment $comment)
     {
-        $request->validate([
-            'body' => 'required',
+       // Ensure the comment belongs to the post
+        if ($comment->post_id != $post->id) {
+            abort(404);
+        }
+
+        // Ensure the user is authorized to edit the comment
+        if ($comment->user_id != auth()->user()->id) {
+            abort(403);
+        }
+    
+        $validatedData = $request->validate([
+        'body' => 'required|string',
         ]);
-
-        $comment->body = $request->body;
+    
+        $comment->body = $validatedData['body'];
         $comment->save();
-
-        return redirect()->route('posts.show', [$post])->with('status', 'Comment updated!');
+    
+        return redirect()->route('posts.show', ['forum' => $forum->id, 'post' => $post->id])->with('success', 'Comment updated successfully.');
     }
 
     /**
@@ -108,10 +120,16 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post, Comment $comment)
+    public function destroy(Forum $forum, Post $post, Comment $comment)
     {
+
+         // Ensure the comment belongs to the post
+        if ($comment->post_id != $post->id) {
+        abort(404);
+        }
+
         $comment->delete();
 
-        return redirect()->route('posts.show', [$post])->with('status', 'Comment deleted!');
+        return redirect()->back()->with('success', 'Comment deleted successfully!');
     }
 }

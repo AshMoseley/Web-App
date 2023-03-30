@@ -8,14 +8,15 @@
                     <div class="card-header">{{ __('Create Comment') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('comments.store', $post) }}">
-                            @csrf
+                    <form method="POST" action="{{ route('comments.store', ['forum' => $forum, 'post' => $post]) }}">
 
+                            @csrf
                             <div class="form-group row">
                                 <label for="content" class="col-md-4 col-form-label text-md-right">{{ __('Content') }}</label>
 
                                 <div class="col-md-6">
-                                    <textarea id="content" class="form-control @error('content') is-invalid @enderror" name="content" required autocomplete="content">{{ old('content') }}</textarea>
+                                <textarea id="content" class="form-control @error('body') is-invalid @enderror" name="body" required autocomplete="content">{{ old('body') }}</textarea>
+
 
                                     @error('content')
                                         <span class="invalid-feedback" role="alert">

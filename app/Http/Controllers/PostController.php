@@ -39,16 +39,19 @@ class PostController extends Controller
      */
     public function store(Request $request, Forum $forum)
     {
-        $post = new Post([
-            'title' => $request->title,
-            'body' => $request->body,
+        $request->validate([
+            'title' => 'required|max:255',
+            'body' => 'required',
         ]);
-        
-        $post->user_id = $request->user()->id;
     
-        $forum->posts()->save($post);
+        $post = new Post();
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->user_id = auth()->id(); // assuming you have an authenticated user
+        $post->forum_id = $forum->id;
+        $post->save();
     
-        return redirect()->route('posts.index', $forum);
+        return redirect()->route('forum.show', $forum)->with('success', 'Post created successfully.');
     }
 
     /**
@@ -64,21 +67,6 @@ class PostController extends Controller
     
         return view('posts.show', compact('forum', 'post', 'comments'));
     }
-
-
-
-    public function comment(Request $request, Forum $forum, Post $post)
-    {
-        $comment = new Comment([
-            'body' => $request->body,
-            'user_id' => $request->user()->id
-        ]);
-
-        $post->comments()->save($comment);
-
-        return redirect()->route('posts.show', [$forum, $post]);
-    }
-
 
 
     /**

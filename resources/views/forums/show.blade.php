@@ -10,7 +10,7 @@
                 @foreach($forum->posts as $post)
                     <div class="card mb-3">
                         <div class="card-body">
-                            <h2><a href="{{ route('post.show', [$forum, $post]) }}">{{ $post->title }}</a></h2>
+                            <h2><a href="{{ route('posts.show', [$forum, $post]) }}">{{ $post->title }}</a></h2>
                             <p>{{ $post->body }}</p>
                         </div>
                     </div>

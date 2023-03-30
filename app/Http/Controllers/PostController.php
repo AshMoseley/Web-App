@@ -41,11 +41,12 @@ class PostController extends Controller
         $post = new Post([
             'title' => $request->title,
             'body' => $request->body,
-            'user_id' => $request->user()->id
         ]);
-
+        
+        $post->user_id = $request->user()->id;
+    
         $forum->posts()->save($post);
-
+    
         return redirect()->route('posts.index', $forum);
     }
 
@@ -84,8 +85,12 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
+        if(auth()->user()->id !== $post->user_id) {
+            return redirect()->back()->with('error', 'You are not authorized to edit this post');
+        }
+
         return view('posts.edit', compact('post'));
     }
 
@@ -98,11 +103,21 @@ class PostController extends Controller
      */
     public function update(Request $request, Forum $forum, Post $post)
     {
+          // Check if the authenticated user is the owner of the post
+          if(auth()->user()->id !== $post->user_id) {
+            return redirect()->back()->with('error', 'You are not authorized to edit this post');
+         }
+
+        $this->validate($request, [
+            'title' => 'required',
+            'body' => 'required',
+        ]);
+
         $post->title = $request->title;
         $post->body = $request->body;
         $post->save();
-    
-        return redirect()->route('posts.show', [$forum, $post]);
+
+        return redirect()->route('posts.show', [$post->forum, $post])->with('success', 'Post updated successfully');
     }
 
     /**
@@ -111,7 +126,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
         $post->delete();
 

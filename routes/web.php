@@ -31,8 +31,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/forum', [ForumController::class, 'index'])->name('forum.index');
 Route::get('/forums/{forum}', [ForumController::class, 'show'])->name('forum.show');
 Route::get('/forums/{forum}/{post}', [PostController::class, 'show'])->name('posts.show');
-Route::get('/forums/{forum}/posts/{post}', [PostController::class, 'show'])->name('post.show');
-
+Route::get('/forums/{forum}/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 
 
 // post
@@ -42,11 +41,11 @@ Route::get('/forum/{forum}/post/create', [PostController::class, 'create'])->nam
 Route::post('/forum/{forum}/post', [PostController::class, 'store'])->name('posts.store');
 Route::get('/forum/{forum}/post/{post}', [PostController::class, 'show'])->name('posts.show');
 
-// Reply
-Route::post('/forum/{forum}/post/{post}/reply', [PostController::class, 'reply'])->name('thread.reply');
-Route::get('/forum/{forum}/post/{post}/reply/{reply}/edit', [PostController::class, 'editReply'])->name('thread.editReply');
-Route::put('/forum/{forum}/post/{post}/reply/{reply}', [PostController::class, 'updateReply'])->name('thread.updateReply');
-Route::delete('/forum/{forum}/post/{post}/reply/{reply}', [PostController::class, 'destroyReply'])->name('thread.destroyReply');
+// Comments
+Route::post('/forum/{forum}/post/{post}/reply', [PostController::class, 'comment'])->name('post.comment');
+Route::get('/forum/{forum}/post/{post}/reply/{reply}/edit', [PostController::class, 'editComment'])->name('post.editComment');
+Route::put('/forum/{forum}/post/{post}/reply/{reply}', [PostController::class, 'updateComment'])->name('post.updateComment');
+Route::delete('/forum/{forum}/post/{post}/reply/{reply}', [PostController::class, 'destroyComment'])->name('post.destroyComment');
 
 // profile
 Route::get('/dashboard', function () {

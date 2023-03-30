@@ -13,7 +13,7 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Comment $comment)
     {
         $comments = $post->comments()->get();
         return view('comments.index', compact('comments', 'post'));
@@ -26,17 +26,17 @@ class CommentController extends Controller
      */
     public function create(Request $request, Post $post)
     {
-        $request->validate([
-            'body' => 'required',
+        $validatedData = $request->validate([
+            'body' => 'required|string',
         ]);
-
-        $comment = new Comment();
-        $comment->body = $request->body;
-        $comment->post_id = $post->id;
+    
+        $comment = new Comment;
+        $comment->body = $validatedData['body'];
         $comment->user_id = auth()->user()->id;
-        $comment->save();
-
-        return redirect()->back()->with('status', 'Comment posted!');
+        $post->comments()->save($comment);
+    
+        return redirect()->route('posts.show', [$post])->with('success', 'Comment added successfully!');
+    }
     }
 
     /**

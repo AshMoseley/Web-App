@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Forum;
+use App\Models\Comment;
 
 class PostController extends Controller
 {
@@ -59,8 +60,9 @@ class PostController extends Controller
     public function show(Request $request, Forum $forum, Post $post)
     {
         $post->load('user', 'comments.user');
-
-        return view('posts.show', compact('forum', 'post'));
+        $comments = $post->comments;
+    
+        return view('posts.show', compact('forum', 'post', 'comments'));
     }
 
 

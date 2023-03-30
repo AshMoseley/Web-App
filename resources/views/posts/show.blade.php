@@ -6,6 +6,7 @@
         <div class="col-md-8">
             <div class="card">
             <div class="card-header">{{ $post->title }}</div>
+            <p class="card-subtitle text-muted">{{ __('Posted by') }} {{ $post->user->name }} {{ __('on') }} {{ $post->created_at->format('M d, Y') }}</p>
 
 
                 <div class="card-body">

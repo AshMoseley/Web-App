@@ -13,6 +13,9 @@
                             <h2><a href="{{ route('posts.show', [$forum, $post]) }}">{{ $post->title }}</a></h2>
                             <p>{{ $post->body }}</p>
                         </div>
+                        <div class="card-footer text-muted">
+                            Posted by {{ $post->user->name }} on {{ $post->created_at->toFormattedDateString() }}
+                        </div>
                     </div>
                 @endforeach
             </div>
@@ -20,7 +23,7 @@
                 @auth
                     <div class="card mb-3">
                         <div class="card-body">
-                            <a href="{{ route('posts.create', $forum) }}" class="btn btn-primary btn-block">Create post</a>
+                        <a href="{{ route('posts.create', $forum) }}" class="btn btn-primary btn-block">Create post</a>
                         </div>
                     </div>
                 @endauth

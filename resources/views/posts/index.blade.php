@@ -16,6 +16,9 @@
             <div class="card-footer text-muted">
                 Posted by {{ $post->user->name }} on {{ $post->created_at->toFormattedDateString() }}
             </div>
+            <div class="card-footer text-muted">
+                Comments: {{ $post->comments_count }}
+            </div>
         </div>
     @endforeach
 

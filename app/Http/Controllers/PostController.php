@@ -16,7 +16,15 @@ class PostController extends Controller
      */
     public function index(Request $request, Forum $forum)
     {
-        $posts = $forum->posts()->with('user', 'comments')->paginate(10);
+        $posts = Post::where('forum_id', $forum->id)
+        ->with('user')
+        ->orderBy('created_at', 'desc')
+        ->paginate(10);
+
+        foreach ($posts as $post) {
+        $post->creatorName = $post->user->name;
+        $post->createdAt = $post->created_at->format('M d, Y');
+        }
 
         return view('posts.index', compact('forum', 'posts'));
     }

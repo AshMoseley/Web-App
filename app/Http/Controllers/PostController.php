@@ -57,7 +57,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, Forum $forum, Post $post)
+    public function show(Forum $forum, Post $post)
     {
         $post->load('user', 'comments.user');
         $comments = $post->comments;

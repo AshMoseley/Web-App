@@ -28,17 +28,17 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 // Forum
-Route::get('/forum', [ForumController::class, 'index'])->name('forum.index');
+Route::get('/forums', [ForumController::class, 'index'])->name('forum.index');
 Route::get('/forums/{forum}', [ForumController::class, 'show'])->name('forum.show');
-Route::get('/forums/{forum}/{post}', [PostController::class, 'show'])->name('posts.show');
+Route::get('/forums/{forum}/post/{post}', [PostController::class, 'show'])->name('posts.show');
 //Route::get('/forums/{forum}/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 
 
 // post
-Route::get('/forum/{forum}/post', [PostController::class, 'index'])->name('posts.index');
-Route::put('/forums/{forum}/posts/{post}', [PostController::class, 'update'])->name('posts.update');
-Route::get('/forum/{forum}/post/create', [PostController::class, 'create'])->name('posts.create');
-Route::post('/forum/{forum}/post', [PostController::class, 'store'])->name('posts.store');
+//Route::get('/forum/{forum}/post', [PostController::class, 'index'])->name('posts.index');
+Route::put('/forums/{forum}/post/{post}/update', [PostController::class, 'update'])->name('posts.update');
+Route::get('/forums/{forum}/post/create', [PostController::class, 'create'])->name('posts.create');
+Route::post('/forums/{forum}/post', [PostController::class, 'store'])->name('posts.store');
 //Route::get('/forum/{forum}/post/{post}', [PostController::class, 'show'])->name('posts.show');
 
 // Comments

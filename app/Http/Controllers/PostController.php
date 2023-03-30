@@ -44,14 +44,13 @@ class PostController extends Controller
             'body' => 'required',
         ]);
     
-        $post = new Post();
-        $post->title = $request->title;
-        $post->body = $request->body;
-        $post->user_id = auth()->id(); // assuming you have an authenticated user
-        $post->forum_id = $forum->id;
-        $post->save();
-    
-        return redirect()->route('forum.show', $forum)->with('success', 'Post created successfully.');
+        $post = $forum->posts()->create([
+            'title' => $request->title,
+            'body' => $request->body,
+            'user_id' => auth()->id(),
+        ]);
+
+        return redirect()->route('posts.show', [$forum, $post])->with('success', 'Post created successfully.');
     }
 
     /**
@@ -60,12 +59,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Forum $forum, Post $post)
+    public function show(Request $request, Forum $forum, Post $post)
     {
         $post->load('user', 'comments.user');
-        $comments = $post->comments;
-    
-        return view('posts.show', compact('forum', 'post', 'comments'));
+
+        return view('posts.show', compact('forum', 'post'));
     }
 
 
@@ -75,13 +73,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Request $request, Forum $forum, Post $post)
     {
-        if(auth()->user()->id !== $post->user_id) {
+        if (auth()->user()->id !== $post->user_id) {
             return redirect()->back()->with('error', 'You are not authorized to edit this post');
         }
 
-        return view('posts.edit', compact('post'));
+        return view('posts.edit', compact('forum', 'post'));
     }
 
     /**
@@ -103,11 +101,12 @@ class PostController extends Controller
             'body' => 'required',
         ]);
 
-        $post->title = $request->title;
-        $post->body = $request->body;
-        $post->save();
+        $post->update([
+            'title' => $request->title,
+            'body' => $request->body,
+        ]);
 
-        return redirect()->route('posts.show', [$post->forum, $post])->with('success', 'Post updated successfully');
+        return redirect()->route('posts.show', [$forum, $post])->with('success', 'Post updated successfully');
     }
 
     /**
@@ -116,7 +115,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Request $request, Forum $forum, Post $post)
     {
         $post->delete();
 

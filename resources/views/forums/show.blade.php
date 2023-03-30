@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <h1>{{ $forum->name }}</h1>
                 <p>{{ $forum->description }}</p>
                 <hr>
@@ -15,6 +15,15 @@
                         </div>
                     </div>
                 @endforeach
+            </div>
+            <div class="col-md-4">
+                @auth
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <a href="{{ route('posts.create', $forum) }}" class="btn btn-primary btn-block">Create post</a>
+                        </div>
+                    </div>
+                @endauth
             </div>
         </div>
     </div>

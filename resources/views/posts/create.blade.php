@@ -7,7 +7,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Create a new post in {{$forum->name}}</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ route('posts.store', $forum) }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ route('posts.store', ['forum' => $forum->id]) }}">
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">

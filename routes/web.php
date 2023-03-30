@@ -5,6 +5,7 @@ use App\Http\Controllers\ForumController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,33 +20,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('home');
-// });
 
+// Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
-
 
 // Forum
 Route::get('/forums', [ForumController::class, 'index'])->name('forum.index');
 Route::get('/forums/{forum}', [ForumController::class, 'show'])->name('forum.show');
-Route::get('/forums/{forum}/post/{post}', [PostController::class, 'show'])->name('posts.show');
-//Route::get('/forums/{forum}/posts/{post}', [PostController::class, 'show'])->name('posts.show');
-
 
 // post
-//Route::get('/forum/{forum}/post', [PostController::class, 'index'])->name('posts.index');
+Route::get('/forums/{forum}/post/{post}', [PostController::class, 'show'])->name('posts.show');
+Route::post('/forums/{forum}/post', [PostController::class, 'store'])->name('posts.store');
 Route::put('/forums/{forum}/post/{post}/update', [PostController::class, 'update'])->name('posts.update');
 Route::get('/forums/{forum}/post/create', [PostController::class, 'create'])->name('posts.create');
-Route::post('/forums/{forum}/post', [PostController::class, 'store'])->name('posts.store');
-//Route::get('/forum/{forum}/post/{post}', [PostController::class, 'show'])->name('posts.show');
+Route::delete('/forums/{forum}/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+
 
 // Comments
-Route::post('/forum/{forum}/post/{post}/reply', [PostController::class, 'comment'])->name('post.comment');
-Route::get('/forum/{forum}/post/{post}/reply/{reply}/edit', [PostController::class, 'editComment'])->name('post.editComment');
-Route::put('/forum/{forum}/post/{post}/reply/{reply}', [PostController::class, 'updateComment'])->name('post.updateComment');
-Route::delete('/forum/{forum}/post/{post}/reply/{reply}', [PostController::class, 'destroyComment'])->name('post.destroyComment');
+Route::post('/forum/{forum}/post/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
+Route::get('/forum/{forum}/post/{post}/comments/{comment}/edit', [CommentController::class, 'edit'])->name('comments.edit');
+Route::put('/forum/{forum}/post/{post}/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
+Route::delete('/forum/{forum}/post/{post}/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+
 
 // profile
 Route::get('/dashboard', function () {

@@ -23,6 +23,7 @@
                                 </span>
                             @enderror
                         </div>
+                        
 
                         <div class="form-group">
                             <label for="body">{{ __('Body') }}</label>

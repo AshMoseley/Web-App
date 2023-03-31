@@ -23,7 +23,7 @@
                 @auth
                     <div class="card mb-3">
                         <div class="card-body">
-                        <a href="{{ route('posts.create', $forum) }}" class="btn btn-primary btn-block">Create post</a>
+                          <a href="{{ route('posts.create', $forum) }}" class="btn btn-primary btn-block">Create post</a> 
                         </div>
                     </div>
                 @endauth

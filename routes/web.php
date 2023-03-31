@@ -30,10 +30,13 @@ Route::get('/forums/{forum}', [ForumController::class, 'show'])->name('forum.sho
 
 // post
 Route::get('/forums/{forum}/post/{post}', [PostController::class, 'show'])->name('posts.show');
+Route::get('/forums/{forum}/post', [PostController::class, 'index'])->name('posts.index');
 Route::get('/forums/{forum}/create', [PostController::class, 'create'])->name('posts.create');
 Route::post('/forums/{forum}/store', [PostController::class, 'store'])->name('posts.store');
+Route::get('/forums/{forum}/post/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
 Route::put('/forums/{forum}/post/{post}/update', [PostController::class, 'update'])->name('posts.update');
 Route::delete('/forums/{forum}/post/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+
 
 
 // Comments

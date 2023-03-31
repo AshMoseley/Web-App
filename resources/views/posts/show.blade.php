@@ -6,7 +6,19 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ $post->title }}</div>
+                <div class="card-header">
+                    {{ $post->title }}
+                    @if(auth()->user()->id == $post->user_id)
+                    <div class="float-right">
+                        <form action="{{ route('posts.destroy', ['forum' => $post->forum->id, 'post' => $post->id]) }}" method="POST">
+                            {{ csrf_field() }}
+                            {{ method_field('DELETE') }}
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this post?')">{{ __('Delete') }}</button>
+                        </form>
+                        <a href="{{ route('posts.edit', ['forum' => $post->forum->id, 'post' => $post->id]) }}" class="btn btn-sm btn-primary">{{ __('Edit') }}</a>
+                    </div>
+                    @endif
+                </div>
                 <div class="card-body">
                     <p>{{ $post->body }}</p>
                     <hr>
@@ -48,7 +60,3 @@
     </div>
 </div>
 @endsection
-
-
-
-

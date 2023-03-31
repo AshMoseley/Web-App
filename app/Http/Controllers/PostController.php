@@ -83,10 +83,10 @@ class PostController extends Controller
      */
     public function edit(Request $request, Forum $forum, Post $post)
     {
-        if (auth()->user()->id !== $post->user_id) {
-            return redirect()->back()->with('error', 'You are not authorized to edit this post');
+        if ($post->user_id != auth()->user()->id) {
+            abort(403, 'Unauthorized action.');
         }
-
+    
         return view('posts.edit', compact('forum', 'post'));
     }
 
@@ -99,22 +99,22 @@ class PostController extends Controller
      */
     public function update(Request $request, Forum $forum, Post $post)
     {
-          // Check if the authenticated user is the owner of the post
-          if(auth()->user()->id !== $post->user_id) {
-            return redirect()->back()->with('error', 'You are not authorized to edit this post');
-         }
-
-        $this->validate($request, [
-            'title' => 'required',
+        if ($post->user_id != auth()->user()->id) {
+            abort(403, 'Unauthorized action.');
+        }
+    
+        $request->validate([
+            'title' => 'required|max:255',
             'body' => 'required',
         ]);
-
+    
         $post->update([
-            'title' => $request->title,
-            'body' => $request->body,
+            'title' => $request->input('title'),
+            'body' => $request->input('body'),
         ]);
-
-        return redirect()->route('posts.show', [$forum, $post])->with('success', 'Post updated successfully');
+    
+        return redirect()->route('posts.show', ['forum' => $forum->id, 'post' => $post->id])
+                         ->with('success', 'Post updated successfully.');
     }
 
     /**
@@ -125,8 +125,13 @@ class PostController extends Controller
      */
     public function destroy(Request $request, Forum $forum, Post $post)
     {
+        if ($post->user_id != auth()->user()->id) {
+            abort(403, 'Unauthorized action.');
+        }
+    
         $post->delete();
-
-        return redirect()->route('posts.index', $post->forum);
+    
+        return redirect()->route('forums.show', ['forum' => $forum->id])
+                         ->with('success', 'Post deleted successfully.');
     }
 }

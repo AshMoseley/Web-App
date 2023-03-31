@@ -125,13 +125,13 @@ class PostController extends Controller
      */
     public function destroy(Request $request, Forum $forum, Post $post)
     {
-        if ($post->user_id != auth()->user()->id) {
-            abort(403, 'Unauthorized action.');
-        }
-    
-        $post->delete();
-    
-        return redirect()->route('forums.show', ['forum' => $forum->id])
-                         ->with('success', 'Post deleted successfully.');
+         if ($post->user_id != auth()->user()->id) {
+        abort(403, 'Unauthorized action.');
+    }
+
+    $post->delete();
+
+    return redirect()->route('forum.show', ['forum' => $forum->id])
+                     ->with('success', 'Post deleted successfully.');
     }
 }

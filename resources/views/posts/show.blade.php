@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-header">
                     {{ $post->title }}
-                    @if(auth()->user()->id == $post->user_id)
+                    @if(auth()->check() && auth()->user()->id == $post->user_id)
                     <div class="float-right">
                         <form action="{{ route('posts.destroy', ['forum' => $post->forum->id, 'post' => $post->id]) }}" method="POST">
                             {{ csrf_field() }}
@@ -28,7 +28,7 @@
                             <div class="card-body">
                                 <p>{{ $comment->body }}</p>
                                 <p class="card-subtitle text-muted">{{ __('Commented by') }} {{ $comment->user->name }} {{ __('on') }} {{ $comment->created_at->format('M d, Y') }}</p>
-                                @if(auth()->user()->id == $comment->user_id)
+                                @if(auth()->check() && auth()->user()->id == $comment->user_id)
                                 <div class="btn-group">
                                     <a href="{{ route('comments.edit', ['forum' => $post->forum->id, 'post' => $post->id, 'comment' => $comment->id]) }}" class="btn btn-sm btn-primary">{{ __('Edit') }}</a>
                                     <form method="POST" action="{{ route('comments.destroy', ['forum' => $post->forum->id, 'post' => $post->id, 'comment' => $comment->id]) }}">

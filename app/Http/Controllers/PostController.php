@@ -36,6 +36,9 @@ class PostController extends Controller
      */
     public function create(Request $request, Forum $forum)
     {
+        if (auth()->guest()) {
+            return redirect()->route('login');
+        }
         return view('posts.create', compact('forum'));
     }
 

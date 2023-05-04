@@ -27,6 +27,9 @@ class CommentController extends Controller
      */
     public function create(Post $post)
     {
+        if (auth()->guest()) {
+            return redirect()->route('login');
+        }
         return view('comments.create', compact('post'));
     }
 
@@ -42,7 +45,9 @@ class CommentController extends Controller
         if ($post->forum_id != $forum->id) {
             abort(404);
         }
-    
+        if (auth()->guest()) {
+            return redirect()->route('login');
+        }
         $validatedData = $request->validate([
             'body' => 'required|string',
         ]);

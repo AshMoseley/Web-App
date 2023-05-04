@@ -27,7 +27,7 @@
                         <div class="card mb-3">
                             <div class="card-body">
                                 <p>{{ $comment->body }}</p>
-                                <p class="card-subtitle text-muted">{{ __('Commented by') }} {{ $comment->user->name }} {{ __('on') }} {{ $comment->created_at->format('M d, Y') }}</p>
+                                <p class="card-subtitle text-muted">{{ __('Commented by') }} <a href="{{ route('users.posts', $comment->user) }}">{{ $comment->user->name }}</a> {{ __('on') }} {{ $comment->created_at->format('M d, Y') }}</p>
                                 @if(auth()->check() && auth()->user()->id == $comment->user_id)
                                 <div class="btn-group">
                                     <a href="{{ route('comments.edit', ['forum' => $post->forum->id, 'post' => $post->id, 'comment' => $comment->id]) }}" class="btn btn-sm btn-primary">{{ __('Edit') }}</a>

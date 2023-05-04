@@ -14,9 +14,6 @@
                 <div class="card-footer text-muted">
                     Posted on {{ $post->created_at->toFormattedDateString() }}
                 </div>
-                <div class="card-footer text-muted">
-                    Comments: {{ $post->comments_count }}
-                </div>
             </div>
         @endforeach
         <h2>Comments by {{ $user->name }}</h2>
@@ -24,6 +21,7 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <p class="card-text">{{ $comment->body }}</p>
+                    <p class="card-subtitle text-muted">Commented on "{{ $comment->post->title }}"</p>
                 </div>
                 <div class="card-footer text-muted">
                     Posted on {{ $comment->created_at->toFormattedDateString() }}

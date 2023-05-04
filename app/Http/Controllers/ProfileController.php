@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Post;
+use App\Models\Forum;
+use App\Models\Comment;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+
 
 class ProfileController extends Controller
 {
@@ -26,6 +31,15 @@ class ProfileController extends Controller
             'user' => $request->user(),
         ]);
     }
+    
+    public function posts(User $user)
+    {
+        $posts = $user->post()->paginate(10);
+        $comments = $user->comments()->paginate(10);
+        
+        return view('profile.posts', compact('user', 'posts', 'comments'));
+    }
+    
 
     /**
      * Update the user's profile information.

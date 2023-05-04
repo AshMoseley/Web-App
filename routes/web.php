@@ -58,6 +58,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
+Route::get('/users/{user}/posts', [ProfileController::class, 'posts'])->name('users.posts');
+
+
 // Search
 Route::get('/search', [SearchController::class, 'index'])->name('search.index');
 

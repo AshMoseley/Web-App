@@ -14,7 +14,7 @@
                 <a href="{{ route('posts.show', [$forum, $post]) }}" class="btn btn-primary">View Post</a>
             </div>
             <div class="card-footer text-muted">
-                Posted by {{ $post->user->name }} on {{ $post->created_at->toFormattedDateString() }}
+                Posted by <a href="{{ route('user.posts', $post->user) }}">{{ $post->user->name }}</a> on {{ $post->created_at->toFormattedDateString() }}
             </div>
             <div class="card-footer text-muted">
                 Comments: {{ $post->comments_count }}

@@ -14,7 +14,7 @@
                             <p>{{ $post->body }}</p>
                         </div>
                         <div class="card-footer text-muted">
-                            Posted by {{ $post->user->name }} on {{ $post->created_at->toFormattedDateString() }}
+                            Posted by <a href="{{ route('users.posts', $post->user) }}">{{ $post->user->name }}</a> on {{ $post->created_at->toFormattedDateString() }}
                         </div>
                     </div>
                 @endforeach

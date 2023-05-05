@@ -2,13 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Profile;
-use App\Models\User;
-use Database\Factories\ProfileFactory;
+use Database\Factories\RoleFactory;
 
-class ProfileSeeder extends Seeder
+class RoleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,9 +16,7 @@ class ProfileSeeder extends Seeder
      */
     public function run()
     {
-        // Create 10 user profiles
-        // Profile::factory()
-        // ->count(5) 
-        // ->create();
+        Role::factory()->create(['name' => 'admin']);
+        Role::factory()->create(['name' => 'user']);
     }
 }

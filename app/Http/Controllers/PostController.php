@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Forum;
 use App\Models\Comment;
+use App\Models\Role;
+use App\Policies\PostPolicy;
 
 class PostController extends Controller
 {
@@ -16,14 +18,15 @@ class PostController extends Controller
      */
     public function index(Request $request, Forum $forum)
     {
+        $this->authorize('view', $forum);
+
         $posts = Post::where('forum_id', $forum->id)
-        ->with('user')
-        ->orderBy('created_at', 'desc')
-        ->paginate(10);
+            ->with('user')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
 
         foreach ($posts as $post) {
-        $post->creatorName = $post->user->name;
-        $post->createdAt = $post->created_at->format('M d, Y');
+            $this->setPostAttributes($post);
         }
 
         return view('posts.index', compact('forum', 'posts'));
@@ -36,9 +39,8 @@ class PostController extends Controller
      */
     public function create(Request $request, Forum $forum)
     {
-        if (auth()->guest()) {
-            return redirect()->route('login');
-        }
+        $this->authorize('create', Post::class);
+
         return view('posts.create', compact('forum'));
     }
 
@@ -50,6 +52,9 @@ class PostController extends Controller
      */
     public function store(Request $request, Forum $forum)
     {
+
+        $this->authorize('create', Post::class);
+
         $request->validate([
             'title' => 'required|max:255',
             'body' => 'required',
@@ -72,6 +77,9 @@ class PostController extends Controller
      */
     public function show(Request $request, Forum $forum, Post $post)
     {
+
+        $this->authorize('view', $post);
+
         $post->load('user', 'comments.user');
 
         return view('posts.show', compact('forum', 'post'));
@@ -86,10 +94,8 @@ class PostController extends Controller
      */
     public function edit(Request $request, Forum $forum, Post $post)
     {
-        if ($post->user_id != auth()->user()->id) {
-            abort(403, 'Unauthorized action.');
-        }
-    
+        $this->authorize('update', $post);
+
         return view('posts.edit', compact('forum', 'post'));
     }
 
@@ -102,10 +108,8 @@ class PostController extends Controller
      */
     public function update(Request $request, Forum $forum, Post $post)
     {
-        if ($post->user_id != auth()->user()->id) {
-            abort(403, 'Unauthorized action.');
-        }
-    
+        $this->authorize('update', $post);
+
         $request->validate([
             'title' => 'required|max:255',
             'body' => 'required',
@@ -115,11 +119,10 @@ class PostController extends Controller
             'title' => $request->input('title'),
             'body' => $request->input('body'),
         ]);
-    
-        return redirect()->route('posts.show', ['forum' => $forum->id, 'post' => $post->id])
-                         ->with('success', 'Post updated successfully.');
-    }
 
+     return redirect()->route('posts.show', ['forum' => $forum->id, 'post' => $post->id])
+                        ->with('success', 'Post updated successfully.');
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -127,14 +130,12 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, Forum $forum, Post $post)
-    {
-         if ($post->user_id != auth()->user()->id) {
-        abort(403, 'Unauthorized action.');
-    }
+    {      
+        $this->authorize('delete', $post);
 
-    $post->delete();
+         $post->delete();
 
-    return redirect()->route('forum.show', ['forum' => $forum->id])
-                     ->with('success', 'Post deleted successfully.');
+         return redirect()->route('forum.show', ['forum' => $forum->id])
+         ->with('success', 'Post deleted successfully.');
     }
 }

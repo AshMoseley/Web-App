@@ -7,9 +7,8 @@
         @foreach ($posts as $post)
             <div class="card mb-3">
                 <div class="card-body">
-                    <h5 class="card-title">{{ $post->title }}</h5>
+                    <h5 class="card-title"><a href="{{ route('posts.show', [$post->forum, $post]) }}">{{ $post->title }}</a></h5>
                     <p class="card-text">{{ $post->body }}</p>
-                    <a href="{{ route('posts.show', [$post->forum, $post]) }}" class="btn btn-primary">View Post</a>
                 </div>
                 <div class="card-footer text-muted">
                     Posted on {{ $post->created_at->toFormattedDateString() }}
@@ -21,7 +20,7 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <p class="card-text">{{ $comment->body }}</p>
-                    <p class="card-subtitle text-muted">Commented on "{{ $comment->post->title }}"</p>
+                    <p class="card-subtitle text-muted">Commented on "<a href="{{ route('posts.show', [$comment->post->forum, $comment->post]) }}">{{ $comment->post->title }}</a>"</p>
                 </div>
                 <div class="card-footer text-muted">
                     Posted on {{ $comment->created_at->toFormattedDateString() }}

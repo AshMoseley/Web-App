@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Forum;
+use App\Policies\ForumPolicy;
 
 class ForumController extends Controller
 {
@@ -26,6 +27,8 @@ class ForumController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Forum::class);
+        
         return view('forums.create');
     }
 
@@ -37,6 +40,8 @@ class ForumController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Forum::class);
+
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'description' => 'required',
@@ -69,6 +74,8 @@ class ForumController extends Controller
      */
     public function edit(Forum $forum)
     {
+        $this->authorize('update', $forum);
+
         return view('forums.edit', compact('forum'));
     }
 
@@ -81,6 +88,8 @@ class ForumController extends Controller
      */
     public function update(Request $request, Forum $forum)
     {
+        $this->authorize('update', $forum);
+
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'description' => 'required',
@@ -101,6 +110,8 @@ class ForumController extends Controller
      */
     public function destroy(Forum $forum)
     {
+        $this->authorize('delete', $forum);
+        
         $forum->delete();
 
         return redirect()->route('forum.index');

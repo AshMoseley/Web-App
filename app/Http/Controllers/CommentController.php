@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Comment;
 use App\Models\Forum;
+use App\Policies\CommentPolicy;
 
 class CommentController extends Controller
 {
@@ -52,6 +53,8 @@ class CommentController extends Controller
             'body' => 'required|string',
         ]);
     
+        $this->authorize('create', [Comment::class, $post]);
+
         $comment = new Comment;
         $comment->body = $validatedData['body'];
         $comment->user_id = auth()->user()->id;
@@ -87,6 +90,8 @@ class CommentController extends Controller
             abort(404);
         }
     
+        $this->authorize('update', $comment);
+        
         return view('comments.edit', compact('forum', 'post', 'comment'));
     }
 
@@ -99,18 +104,15 @@ class CommentController extends Controller
      */
     public function update(Request $request, Forum $forum, Post $post, Comment $comment)
     {
-       // Ensure the comment belongs to the post
+        $this->authorize('update', $comment);
+        
+        // Ensure the comment belongs to the post
         if ($comment->post_id != $post->id) {
             abort(404);
         }
-
-        // Ensure the user is authorized to edit the comment
-        if ($comment->user_id != auth()->user()->id) {
-            abort(403);
-        }
     
         $validatedData = $request->validate([
-        'body' => 'required|string',
+            'body' => 'required|string',
         ]);
     
         $comment->body = $validatedData['body'];
@@ -118,6 +120,7 @@ class CommentController extends Controller
     
         return redirect()->route('posts.show', ['forum' => $forum->id, 'post' => $post->id])->with('success', 'Comment updated successfully.');
     }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -133,6 +136,8 @@ class CommentController extends Controller
         abort(404);
         }
 
+        $this->authorize('delete', $comment);
+        
         $comment->delete();
 
         return redirect()->back()->with('success', 'Comment deleted successfully!');

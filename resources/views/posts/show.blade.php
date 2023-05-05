@@ -8,16 +8,18 @@
             <div class="card">
                 <div class="card-header">
                     {{ $post->title }}
-                    @if(auth()->check() && auth()->user()->id == $post->user_id)
+                    @can('delete', $post)
                     <div class="float-right">
                         <form action="{{ route('posts.destroy', ['forum' => $post->forum->id, 'post' => $post->id]) }}" method="POST">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
                             <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this post?')">{{ __('Delete') }}</button>
                         </form>
+                       @can('update', $post)
                         <a href="{{ route('posts.edit', ['forum' => $post->forum->id, 'post' => $post->id]) }}" class="btn btn-sm btn-primary">{{ __('Edit') }}</a>
+                        @endcan
                     </div>
-                    @endif
+                    @endcan
                 </div>
                 <div class="card-body">
                     <p>{{ $post->body }}</p>
@@ -28,16 +30,18 @@
                             <div class="card-body">
                                 <p>{{ $comment->body }}</p>
                                 <p class="card-subtitle text-muted">{{ __('Commented by') }} <a href="{{ route('users.posts', $comment->user) }}">{{ $comment->user->name }}</a> {{ __('on') }} {{ $comment->created_at->format('M d, Y') }}</p>
-                                @if(auth()->check() && auth()->user()->id == $comment->user_id)
+                                @can('delete', $comment)
                                 <div class="btn-group">
+                                    @can('update', $comment)
                                     <a href="{{ route('comments.edit', ['forum' => $post->forum->id, 'post' => $post->id, 'comment' => $comment->id]) }}" class="btn btn-sm btn-primary">{{ __('Edit') }}</a>
+                                    @endcan
                                     <form method="POST" action="{{ route('comments.destroy', ['forum' => $post->forum->id, 'post' => $post->id, 'comment' => $comment->id]) }}">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger">{{ __('Delete') }}</button>
                                     </form>
                                 </div>
-                                @endif
+                                @endcan
                             </div>
                         </div>
                     @endforeach

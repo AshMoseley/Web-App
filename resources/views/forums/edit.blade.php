@@ -8,7 +8,7 @@
                     <div class="card-header">{{ __('Edit Forum') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('forums.update', $forum) }}">
+                        <form method="POST" action="{{ route('forum.update', $forum) }}">
                             @csrf
                             @method('PUT')
 

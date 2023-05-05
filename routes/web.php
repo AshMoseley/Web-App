@@ -7,6 +7,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,8 +31,8 @@ Route::get('/forums/{forum}', [ForumController::class, 'show'])->name('forum.sho
 // Forum Admin
 
 Route::group(['middleware' => 'admin'], function () {
-    Route::get('/forums/create', [ForumController::class, 'create'])->name('forum.create');
     Route::post('/forums', [ForumController::class, 'store'])->name('forum.store');
+    Route::get('/forums/create', [ForumController::class, 'create'])->name('forum.create');
     Route::get('/forums/{forum}/edit', [ForumController::class, 'edit'])->name('forum.edit');
     Route::put('/forums/{forum}', [ForumController::class, 'update'])->name('forum.update');
 });
@@ -45,6 +46,11 @@ Route::post('/forums/{forum}/store', [PostController::class, 'store'])->name('po
 Route::get('/forums/{forum}/post/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
 Route::put('/forums/{forum}/post/{post}/update', [PostController::class, 'update'])->name('posts.update');
 Route::delete('/forums/{forum}/post/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+
+// Tags
+Route::get('/tags/{tag}', 'TagController@show')->name('tags.show');
+
+
 
 // admin
 Route::get('/posts/{post}/edit', 'PostController@edit')->middleware('admin');

@@ -26,6 +26,12 @@
                     @if($post->image)
                     <img src="{{ asset('storage/images/'.$post->image) }}" alt="{{ $post->title }}" class="img-fluid">
                     @endif
+                    <h5 class="card-title">{{ __('Tags') }}</h5>
+                        <ul class="list-inline">
+                            @foreach ($post->tags as $tag)
+                                <li class="list-inline-item"><a href="{{ route('tags.show', $tag) }}">{{ $tag->name }}</a></li>
+                            @endforeach
+                        </ul>
                     <h3>{{ __('Comments') }}</h3>
                     @foreach($post->comments as $comment)
                         <div class="card mb-3">
@@ -65,4 +71,8 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('head')
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 @endsection

@@ -37,7 +37,29 @@
                                     @endif
                                 </div>
                             </div>
+                            
+                            <!-- @if(isset($tags))
+                                <div class="form-group{{ $errors->has('tags') ? ' has-error' : '' }}">
+                                    <label for="tags" class="col-md-4 control-label">Tags</label>
 
+                                    <div class="col-md-6">
+                                        <select id="tags" class="form-control" name="tags[]" multiple>
+                                            @foreach($tags as $tag)
+                                                <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                            @endforeach
+                                        </select>
+
+                                        @if ($errors->has('tags'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('tags') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            @endif
+ -->
+
+                            
                             <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
                                 <label for="image" class="col-md-4 control-label">Image</label>
 

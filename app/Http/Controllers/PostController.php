@@ -115,22 +115,44 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Forum $forum, Post $post)
-    {
-        $this->authorize('update', $post);
+{
+    $this->authorize('update', $post);
 
-        $request->validate([
-            'title' => 'required|max:255',
-            'body' => 'required',
-        ]);
+    $request->validate([
+        'title' => 'required|max:255',
+        'body' => 'required',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'remove_image' => 'nullable|boolean'
+    ]);
+
+    $post->title = $request->input('title');
+    $post->body = $request->input('body');
+
+    if ($request->hasFile('image')) {
+        if ($post->image && file_exists(public_path('images/' . $post->image))) {
+            unlink(public_path('images/' . $post->image));
+        }
     
-        $post->update([
-            'title' => $request->input('title'),
-            'body' => $request->input('body'),
-        ]);
+        $image = $request->file('image');
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        $image->storeAs('images', $imageName, 'public');
+        $post->image = $imageName;
+    } else if ($request->input('remove_image') == 1) {
+        if ($post->image && file_exists(public_path('images/' . $post->image))) {
+            unlink(public_path('images/' . $post->image));
+        }
     
-    return redirect()->route('posts.show', ['forum' => $forum->id, 'id' => $post->id])
-                        ->with('success', 'Post updated successfully.');
+        $post->image = null;
     }
+    
+    $post->save();
+
+    return redirect()->route('posts.show', ['forum' => $forum->id, 'post' => $post->id])
+        ->with('success', 'Post updated successfully.');
+}
+
+    
+    
     /**
      * Remove the specified resource from storage.
      *

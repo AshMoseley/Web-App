@@ -11,6 +11,9 @@
             <div class="card-body">
                 <h5 class="card-title">{{ $post->title }}</h5>
                 <p class="card-text">{{ $post->body }}</p>
+                @if ($post->image)
+                    <img src="{{ asset('storage/images/'.$post->image) }}" alt="{{ $post->title }}" class="img-fluid">
+                @endif
                 <a href="{{ route('posts.show', [$forum, $post]) }}" class="btn btn-primary">View Post</a>
             </div>
             <div class="card-footer text-muted">

@@ -23,7 +23,9 @@
                 </div>
                 <div class="card-body">
                     <p>{{ $post->body }}</p>
-                    <hr>
+                    @if($post->image)
+                    <img src="{{ asset('storage/images/'.$post->image) }}" alt="{{ $post->title }}" class="img-fluid">
+                    @endif
                     <h3>{{ __('Comments') }}</h3>
                     @foreach($post->comments as $comment)
                         <div class="card mb-3">

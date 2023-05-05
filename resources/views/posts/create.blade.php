@@ -7,7 +7,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Create a new post in {{$forum->name}}</div>
                     <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('posts.store', ['forum' => $forum->id]) }}">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ route('posts.store', ['forum' => $forum->id]) }}" enctype="multipart/form-data">
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
@@ -33,6 +33,20 @@
                                     @if ($errors->has('body'))
                                         <span class="help-block">
                                             <strong>{{ $errors->first('body') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
+                                <label for="image" class="col-md-4 control-label">Image</label>
+
+                                <div class="col-md-6">
+                                    <input id="image" type="file" class="form-control" name="image">
+
+                                    @if ($errors->has('image'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('image') }}</strong>
                                         </span>
                                     @endif
                                 </div>

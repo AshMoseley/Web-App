@@ -58,6 +58,7 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'body' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
     
         $post = $forum->posts()->create([
@@ -66,6 +67,13 @@ class PostController extends Controller
             'user_id' => auth()->id(),
         ]);
 
+         // Handle image upload
+         if ($request->has('image')) {
+            $imagePath = $request->file('image')->store('public/images');
+            $post->image = basename($imagePath);
+            $post->save();
+        }
+        
         return redirect()->route('posts.show', [$forum, $post])->with('success', 'Post created successfully.');
     }
 
@@ -119,8 +127,8 @@ class PostController extends Controller
             'title' => $request->input('title'),
             'body' => $request->input('body'),
         ]);
-
-     return redirect()->route('posts.show', ['forum' => $forum->id, 'post' => $post->id])
+    
+    return redirect()->route('posts.show', ['forum' => $forum->id, 'id' => $post->id])
                         ->with('success', 'Post updated successfully.');
     }
     /**
@@ -133,6 +141,7 @@ class PostController extends Controller
     {      
         $this->authorize('delete', $post);
 
+        
          $post->delete();
 
          return redirect()->route('forum.show', ['forum' => $forum->id])

@@ -72,7 +72,3 @@
     </div>
 </div>
 @endsection
-
-@section('head')
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-@endsection

@@ -1,28 +1,205 @@
-/* Set the background color of the body to light gray */
+/* Set the background color of the body to a light shade of gray */
 body {
-    background-color: #f2f2f2;
+  background-color: #f2f2f2;
+}
+
+/* Set the font family and size for all text on the page */
+body, input, button {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+}
+
+/* Style the header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+}
+
+/* Style the navigation bar */
+.navbar {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+}
+
+/* Style the navigation links */
+.nav-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Style the individual navigation link */
+.nav-link {
+  margin-left: 10px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+/* Style the active navigation link */
+.nav-link.active {
+  font-weight: bold;
+}
+
+/* Style the logo */
+.logo {
+  max-width: 200px;
+  margin: 10px;
+}
+
+/* Style the logo for screens smaller than 768px */
+@media screen and (max-width: 767px) {
+  .logo {
+    max-width: 150px;
   }
-  
-  /* Set the font family and size for all text on the page */
-  body, input, button {
-    font-family: Arial, sans-serif;
-    font-size: 16px;
+}
+
+/* Style the logo for screens larger than 768px */
+@media screen and (min-width: 768px) {
+  .logo {
+    max-width: 200px;
   }
-  
-  /* Style the navigation bar */
-  .navbar {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-  }
-  
-  /* Style links */
-  a {
-    color: #333;
-    text-decoration: none;
-  }
-  
-  a:hover {
-    color: #666;
-  }
-  
+}
+
+
+
+/* Style links */
+a {
+  color: #333;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #666;
+}
+
+/* Style the container for the post */
+.container {
+  margin-top: 20px;
+}
+
+/* Style the card that contains the post */
+.card {
+  margin-bottom: 20px;
+}
+
+/* Style the card header */
+.card-header {
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+}
+
+/* Style the title of the post */
+.card-header h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+/* Style the actions on the post */
+.card-header .actions {
+  margin-top: 10px;
+}
+
+/* Style the card body */
+.card-body {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+
+/* Style the image in the post */
+.card-body img {
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+
+/* Style the tags */
+.tags {
+  margin-top: 20px;
+}
+
+.tags ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tags ul li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.tags ul li a {
+  background-color: #ccc;
+  color: #333;
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+/* Style the comments */
+.comments {
+  margin-top: 20px;
+}
+
+.comments .card {
+  margin-bottom: 20px;
+}
+
+.comments .card-body {
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.comments .card-body p {
+  margin: 0;
+}
+
+.comments .card-body .meta {
+  margin-top: 10px;
+}
+
+.comments .card-body .meta a {
+  color: #333;
+}
+
+.comments .card-body .actions {
+  margin-top: 10px;
+}
+
+.comments .card-body .actions form {
+  display: inline-block;
+}
+
+.comments .card-body .actions button {
+  margin-left: 10px;
+}
+
+/* Style the comment form */
+.comment-form {
+  margin-top: 20px;
+}
+
+.comment-form textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+.comment-form button {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}

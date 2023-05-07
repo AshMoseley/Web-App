@@ -4,27 +4,26 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="flex-shrink-0">
+                <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                     </a>
                 </div>
 
-                <!-- Navigation Links -->
-                <div class="flex-grow">
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            <!-- Navigation Links -->
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <!-- <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('forum.index')" :active="request()->routeIs('forums.*')">
-                        {{ __('Forums') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('home')" :active="request()->routeIs('home.*')">
+                    </x-nav-link> -->
+                    <x-nav-link :href="route('home')" :active="request()->routeIs('home.*')">
                         {{ __('Home') }}
-                        </x-nav-link>
-                    </div>
+                    </x-nav-link>
+                    <x-nav-link :href="route('forum.index')" :active="request()->routeIs('forums.*')">
+                        {{ __('Forums') }}
+                    </x-nav-link>
                 </div>
-
+            </div>
+            
             <!-- Settings Dropdown -->
             @if (Auth::user())
             <div class="hidden sm:flex sm:items-center sm:ml-6">

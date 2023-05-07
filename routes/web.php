@@ -53,10 +53,10 @@ Route::get('/tags/{tag}', 'TagController@show')->name('tags.show');
 
 
 // admin
-Route::get('/posts/{post}/edit', 'PostController@edit')->middleware('admin');
-Route::put('/posts/{post}', 'PostController@update')->middleware('admin');
-Route::get('/comments/{comment}/edit', 'CommentController@edit')->middleware('admin');
-Route::put('/comments/{comment}', 'CommentController@update')->middleware('admin');
+// Route::get('/posts/{post}/edit', 'PostController@edit')->middleware('admin');
+// Route::put('/posts/{post}', 'PostController@update')->middleware('admin');
+// Route::get('/comments/{comment}/edit', 'CommentController@edit')->middleware('admin');
+// Route::put('/comments/{comment}', 'CommentController@update')->middleware('admin');
 
 
 // Comments

@@ -1,37 +1,34 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Edit Comment') }}</div>
-
-                    <div class="card-body">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Edit Comment') }}</div>
+                <div class="card-body">
                     <form method="POST" action="{{ route('comments.update', ['forum' => $post->forum->id, 'post' => $post->id, 'comment' => $comment->id]) }}">
-                            @csrf
-                            @method('PUT')
+                        @csrf
+                        @method('PUT')
 
-                            <div class="form-group">
-                                <label for="body">{{ __('Comment') }}</label>
-                                <textarea id="body" class="form-control @error('body') is-invalid @enderror" name="body" rows="5" required>{{ $comment->body }}</textarea>
+                        <div class="mb-4">
+                            <label for="body" class="block text-gray-700 font-bold mb-2">{{ __('Comment') }}</label>
+                            <textarea id="body" class="form-textarea w-full @error('body') border-red-500 @enderror" name="body" rows="5" required>{{ $comment->body }}</textarea>
 
-                                @error('body')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
+                            @error('body')
+                            <p class="text-red-500 text-xs italic mt-4">{{ $message }}</p>
+                            @enderror
+                        </div>
 
-                            <div class="form-group mb-0">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Update Comment') }}
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                        <div class="flex items-center justify-end mt-4">
+                            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                {{ __('Update Comment') }}
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 @endsection

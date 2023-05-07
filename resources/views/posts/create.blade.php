@@ -1,44 +1,46 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Create a new post in {{$forum->name}}</div>
-                    <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ route('posts.store', ['forum' => $forum->id]) }}" enctype="multipart/form-data">
-                            {{ csrf_field() }}
+<div class="container mx-auto">
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+        <div class="font-bold text-lg mb-4">{{ __('Create a new post in') }} {{$forum->name}}</div>
+        <form class="w-full" role="form" method="POST" action="{{ route('posts.store', ['forum' => $forum->id]) }}" enctype="multipart/form-data">
+            @csrf
+            <div class="mb-4">
+                <label for="title" class="block text-gray-700 font-bold mb-2">{{ __('Title') }}</label>
+                <input id="title" type="text" class="form-input w-full @error('title') border-red-500 @enderror" name="title" value="{{ old('title') }}" required autofocus>
+                @error('title')
+                <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                @enderror
+            </div>
 
-                            <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-                                <label for="title" class="col-md-4 control-label">Title</label>
+            <div class="mb-4">
+                <label for="body" class="block text-gray-700 font-bold mb-2">{{ __('Body') }}</label>
+                <textarea id="body" class="form-input w-full h-64 resize-none @error('body') border-red-500 @enderror" name="body" required>{{ old('body') }}</textarea>
+                @error('body')
+                <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                @enderror
+            </div>
 
-                                <div class="col-md-6">
-                                    <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" required autofocus>
+            <div class="mb-4">
+                <label for="image" class="block text-gray-700 font-bold mb-2">{{ __('Image') }}</label>
+                <input id="image" type="file" class="form-input w-full @error('image') border-red-500 @enderror" name="image">
+                @error('image')
+                <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                @enderror
+            </div>
 
-                                    @if ($errors->has('title'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('title') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
+            <div class="flex items-center justify-between">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    {{ __('Post') }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+@endsection
 
-                            <div class="form-group{{ $errors->has('body') ? ' has-error' : '' }}">
-                                <label for="body" class="col-md-4 control-label">Body</label>
-
-                                <div class="col-md-6">
-                                    <textarea id="body" class="form-control" name="body" required>{{ old('body') }}</textarea>
-
-                                    @if ($errors->has('body'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('body') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-                            
-                            <!-- @if(isset($tags))
+<!-- @if(isset($tags))
                                 <div class="form-group{{ $errors->has('tags') ? ' has-error' : '' }}">
                                     <label for="tags" class="col-md-4 control-label">Tags</label>
 
@@ -59,32 +61,3 @@
                             @endif
  -->
 
-                            
-                            <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
-                                <label for="image" class="col-md-4 control-label">Image</label>
-
-                                <div class="col-md-6">
-                                    <input id="image" type="file" class="form-control" name="image">
-
-                                    @if ($errors->has('image'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('image') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        Post
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-@endsection

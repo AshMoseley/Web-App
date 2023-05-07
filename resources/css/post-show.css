@@ -1,0 +1,42 @@
+.bg-primary {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .col-md-8 {
+    max-width: 800px;
+  }
+  
+  .bg-secondary {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .bg-secondary .card-body {
+    text-align: center;
+  }
+  
+  .bg-gray-200 {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .py-3 {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  
+  .py-4 {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+  
+  .px-4 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  

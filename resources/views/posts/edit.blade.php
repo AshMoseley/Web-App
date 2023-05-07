@@ -1,61 +1,65 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Edit Post</h1>
-    <form action="{{ route('posts.update', [$forum, $post]) }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        @method('PUT')
-        <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" name="title" value="{{ $post->title }}">
+<h1 class="text-3xl font-bold mb-4">Edit Post</h1>
+<form action="{{ route('posts.update', [$forum, $post]) }}" method="POST" enctype="multipart/form-data" class="max-w-lg">
+    @csrf
+    @method('PUT')
+    <div class="mb-4">
+        <label for="title" class="block text-gray-700 font-bold mb-2">Title</label>
+        <input type="text" class="form-input rounded-md shadow-sm w-full" id="title" name="title" value="{{ $post->title }}">
+    </div>
+    <div class="mb-4">
+        <label for="body" class="block text-gray-700 font-bold mb-2">Body</label>
+        <textarea class="form-input rounded-md shadow-sm w-full" id="body" name="body">{{ $post->body }}</textarea>
+    </div>
+    <div class="mb-4">
+        <label for="image" class="block text-gray-700 font-bold mb-2">Image</label>
+        <div class="mb-3">
+            @if($post->image)
+            <img src="{{ asset('storage/'.$post->image) }}" alt="{{ $post->title }}" class="max-w-xs rounded-md shadow-sm">
+            @else
+            <p>No image uploaded.</p>
+            @endif
         </div>
-        <div class="form-group">
-            <label for="body">Body</label>
-            <textarea class="form-control" id="body" name="body">{{ $post->body }}</textarea>
-        </div>
-        <div class="form-group">
-            <label for="image">Image</label>
-            <div class="mb-3">
-                @if($post->image)
-                    <img src="{{ asset('storage/'.$post->image) }}" alt="{{ $post->title }}" style="max-width: 300px;">
-                @else
-                    <p>No image uploaded.</p>
-                @endif
-            </div>
-            <div class="input-group mb-3">
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="image" name="image">
-                    <label class="custom-file-label" for="image">Choose file</label>
+        <div class="flex items-center justify-between mb-3">
+            <div class="flex-1 pr-4">
+                <div class="relative rounded-md shadow-sm">
+                    <input type="file" class="form-input block w-full sm:text-sm sm:leading-5" id="image" name="image">
+                    <label class="absolute inset-0 bg-white opacity-50 rounded-md"></label>
+                    <label class="absolute top-0 right-0 bg-indigo-500 text-white py-2 px-3 rounded-md hover:bg-indigo-600 cursor-pointer" for="image">Choose file</label>
                 </div>
-                <div class="input-group-append">
-                    <button class="btn btn-outline-danger" type="button" id="delete-image-btn">Delete</button>
-                </div>
             </div>
-            <input type="hidden" name="remove_image" id="remove-image" value="0">
-        </div>
-        <div class="form-group">
-            <label for="current_image">Current Image</label>
-            <div class="mb-3">
-                @if($post->image)
-                   <img src="{{ asset('storage/images/'.$post->image) }}" alt="{{ $post->title }}" class="img-fluid">
-                @else
-                    <p>No image uploaded.</p>
-                @endif
+            <div class="flex-initial">
+                <button class="bg-red-500 text-white py-2 px-3 rounded-md hover:bg-red-600" type="button" id="delete-image-btn">Delete</button>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Update Post</button>
-    </form>
+        <input type="hidden" name="remove_image" id="remove-image" value="0">
+    </div>
+    <div class="mb-4">
+        <label for="current_image" class="block text-gray-700 font-bold mb-2">Current Image</label>
+        <div class="mb-3">
+            @if($post->image)
+            <img src="{{ asset('storage/images/'.$post->image) }}" alt="{{ $post->title }}" class="max-w-xs rounded-md shadow-sm">
+            @else
+            <p>No image uploaded.</p>
+            @endif
+        </div>
+    </div>
+    <button type="submit" class="bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded-md">Update Post</button>
+</form>
 @endsection
 
+
 @section('scripts')
-    <script>
-        document.getElementById('delete-image-btn').addEventListener('click', function(e) {
-            e.preventDefault();
-            if (confirm('Are you sure you want to delete this image?')) {
-                document.getElementById('image').value = null;
-                this.closest('.input-group').style.display = 'none';
-                document.getElementById('remove-image').value = 1;
-            }
-        });
-    </script>
+<script>
+    document.getElementById('delete-image-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        if (confirm('Are you sure you want to delete this image?')) {
+            document.getElementById('image').value = null;
+            this.closest('.input-group').style.display = 'none';
+            document.getElementById('remove-image').value = 1;
+        }
+    });
+</script>
 @endsection

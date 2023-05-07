@@ -29,4 +29,5 @@ class Livecomment extends Component
 
         $this->newComment = '';
     }
+    
 }

@@ -29,13 +29,13 @@ class ForumController extends Controller
     {
         $this->authorize('create', Forum::class);
         
-        return view('forums.create');
+        return view('forums.create', compact('forum'));
     }
 
-    /**
+    /**a
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request  $requests
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)

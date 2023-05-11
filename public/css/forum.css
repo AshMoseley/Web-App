@@ -1,0 +1,110 @@
+/* Body */
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f2f2f2;
+  }
+  
+  /* Links */
+  a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+  }
+  
+  /* Headings */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 1em 0;
+  }
+  
+  /* Buttons */
+  .button {
+    display: inline-block;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    color: #fff;
+    background-color: #007bff;
+  }
+  .button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Forms */
+  .form-label {
+    display: block;
+    margin-bottom: 0.5em;
+    font-weight: 600;
+  }
+  .form-control {
+    display: block;
+    width: 100%;
+    padding: 0.5em;
+    border: none;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.1s ease-in-out;
+  }
+  .form-control:focus {
+    outline: none;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 0 3px rgba(0, 123, 255, 0.5);
+  }
+  
+  /* Forum Specific Styles */
+  .forum-header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 1em;
+    margin-bottom: 2em;
+  }
+  
+  .forum-category {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 1em;
+    margin-bottom: 2em;
+  }
+  
+  .forum-category h2 {
+    margin-top: 0;
+  }
+  
+  .forum-thread {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 1em;
+    margin-bottom: 2em;
+  }
+  
+  .forum-thread h3 {
+    margin-top: 0;
+  }
+  
+  .forum-post {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 1em;
+    margin-bottom: 2em;
+  }
+  
+  .forum-post h4 {
+    margin-top: 0;
+    margin-bottom: 0.5em;
+  }
+  
+  .forum-post p {
+    margin-bottom: 0.5em;
+  }
+  

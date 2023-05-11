@@ -28,8 +28,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 // Forum
 Route::get('/forums', [ForumController::class, 'index'])->name('forum.index');
 Route::get('/forums/{forum}', [ForumController::class, 'show'])->name('forum.show');
-// Forum Admin
 
+// Forum Admin
 Route::group(['middleware' => 'admin'], function () {
     Route::post('/forums', [ForumController::class, 'store'])->name('forum.store');
     Route::get('/forums/create', [ForumController::class, 'create'])->name('forum.create');
@@ -48,7 +48,8 @@ Route::put('/forums/{forum}/post/{post}/update', [PostController::class, 'update
 Route::delete('/forums/{forum}/post/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 
 // Tags
-Route::get('/tags/{tag}', 'TagController@show')->name('tags.show');
+// Route::get('/tags/{tag}', 'TagController@show')->name('tags.show');
+Route::get('/tags/{tag}', [TagController::class, 'show'])->name('tags.show');
 
 
 

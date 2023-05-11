@@ -31,8 +31,8 @@ Route::get('/forums/{forum}', [ForumController::class, 'show'])->name('forum.sho
 
 // Forum Admin
 Route::group(['middleware' => 'admin'], function () {
-    Route::post('/forums', [ForumController::class, 'store'])->name('forum.store');
     Route::get('/forums/create', [ForumController::class, 'create'])->name('forum.create');
+    Route::post('/forums', [ForumController::class, 'store'])->name('forum.store');
     Route::get('/forums/{forum}/edit', [ForumController::class, 'edit'])->name('forum.edit');
     Route::put('/forums/{forum}', [ForumController::class, 'update'])->name('forum.update');
 });
@@ -48,16 +48,8 @@ Route::put('/forums/{forum}/post/{post}/update', [PostController::class, 'update
 Route::delete('/forums/{forum}/post/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 
 // Tags
-// Route::get('/tags/{tag}', 'TagController@show')->name('tags.show');
 Route::get('/tags/{tag}', [TagController::class, 'show'])->name('tags.show');
 
-
-
-// admin
-// Route::get('/posts/{post}/edit', 'PostController@edit')->middleware('admin');
-// Route::put('/posts/{post}', 'PostController@update')->middleware('admin');
-// Route::get('/comments/{comment}/edit', 'CommentController@edit')->middleware('admin');
-// Route::put('/comments/{comment}', 'CommentController@update')->middleware('admin');
 
 
 // Comments

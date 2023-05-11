@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Forum;
+use App\Models\Tag;
 use App\Models\Comment;
 use App\Models\Role;
 use App\Policies\PostPolicy;
@@ -37,12 +38,13 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request, Forum $forum)
+    public function create(Forum $forum)
     {
         $this->authorize('create', Post::class);
-
-        return view('posts.create', compact('forum'));
+        $tags = Tag::all();
+        return view('posts.create', compact('forum', 'tags'));
     }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -58,22 +60,29 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'body' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'tags' => 'nullable|array',
+            'tags.*' => 'exists:tags,id',
         ]);
-    
+
         $post = $forum->posts()->create([
             'title' => $request->title,
             'body' => $request->body,
             'user_id' => auth()->id(),
         ]);
 
-         // Handle image upload
-         if ($request->has('image')) {
+        // Handle image upload
+        if ($request->has('image')) {
             $imagePath = $request->file('image')->store('public/images');
             $post->image = basename($imagePath);
             $post->save();
         }
         
+        // Attach tags to the post
+        $tags = $request->input('tags', []);
+        $post->tags()->sync($tags);
+
+
         return redirect()->route('posts.show', [$forum, $post])->with('success', 'Post created successfully.');
     }
 
@@ -104,7 +113,9 @@ class PostController extends Controller
     {
         $this->authorize('update', $post);
 
-        return view('posts.edit', compact('forum', 'post'));
+        $tags = Tag::all();
+
+         return view('posts.edit', compact('forum', 'post', 'tags'));
     }
 
     /**
@@ -115,44 +126,44 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Forum $forum, Post $post)
-{
-    $this->authorize('update', $post);
+    {
+        $this->authorize('update', $post);
 
-    $request->validate([
-        'title' => 'required|max:255',
-        'body' => 'required',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'remove_image' => 'nullable|boolean'
-    ]);
+        $request->validate([
+            'title' => 'required|max:255',
+            'body' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'remove_image' => 'nullable|boolean'
+        ]);
 
-    $post->title = $request->input('title');
-    $post->body = $request->input('body');
+        $post->title = $request->input('title');
+        $post->body = $request->input('body');
 
-    if ($request->hasFile('image')) {
-        if ($post->image && file_exists(public_path('images/' . $post->image))) {
-            unlink(public_path('images/' . $post->image));
+        if ($request->hasFile('image')) {
+            if ($post->image && file_exists(public_path('images/' . $post->image))) {
+                unlink(public_path('images/' . $post->image));
+            }
+
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('images', $imageName, 'public');
+            $post->image = $imageName;
+        } else if ($request->input('remove_image') == 1) {
+            if ($post->image && file_exists(public_path('images/' . $post->image))) {
+                unlink(public_path('images/' . $post->image));
+            }
+
+            $post->image = null;
         }
-    
-        $image = $request->file('image');
-        $imageName = time() . '.' . $image->getClientOriginalExtension();
-        $image->storeAs('images', $imageName, 'public');
-        $post->image = $imageName;
-    } else if ($request->input('remove_image') == 1) {
-        if ($post->image && file_exists(public_path('images/' . $post->image))) {
-            unlink(public_path('images/' . $post->image));
-        }
-    
-        $post->image = null;
+
+        $post->save();
+
+        return redirect()->route('posts.show', ['forum' => $forum->id, 'post' => $post->id])
+            ->with('success', 'Post updated successfully.');
     }
-    
-    $post->save();
 
-    return redirect()->route('posts.show', ['forum' => $forum->id, 'post' => $post->id])
-        ->with('success', 'Post updated successfully.');
-}
 
-    
-    
+
     /**
      * Remove the specified resource from storage.
      *
@@ -160,13 +171,13 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, Forum $forum, Post $post)
-    {      
+    {
         $this->authorize('delete', $post);
 
-        
-         $post->delete();
 
-         return redirect()->route('forum.show', ['forum' => $forum->id])
-         ->with('success', 'Post deleted successfully.');
+        $post->delete();
+
+        return redirect()->route('forum.show', ['forum' => $forum->id])
+            ->with('success', 'Post deleted successfully.');
     }
 }

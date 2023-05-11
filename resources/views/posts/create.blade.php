@@ -30,6 +30,20 @@
                 @enderror
             </div>
 
+            <div class="mb-4">
+                <label for="tags" class="block text-gray-700 font-bold mb-2">{{ __('Tags') }}</label>
+                <select id="tags" name="tags[]" class="form-input w-full @error('tags') border-red-500 @enderror" multiple>
+                    @foreach($tags as $tag)
+                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                    @endforeach
+                </select>
+                @error('tags')
+                <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                @enderror
+            </div>
+
+
+
             <div class="flex items-center justify-between">
                 <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     {{ __('Post') }}
@@ -39,25 +53,3 @@
     </div>
 </div>
 @endsection
-
-<!-- @if(isset($tags))
-                                <div class="form-group{{ $errors->has('tags') ? ' has-error' : '' }}">
-                                    <label for="tags" class="col-md-4 control-label">Tags</label>
-
-                                    <div class="col-md-6">
-                                        <select id="tags" class="form-control" name="tags[]" multiple>
-                                            @foreach($tags as $tag)
-                                                <option value="{{ $tag->id }}">{{ $tag->name }}</option>
-                                            @endforeach
-                                        </select>
-
-                                        @if ($errors->has('tags'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('tags') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
-                            @endif
- -->
-

@@ -16,11 +16,38 @@ class TagController extends Controller
         return view('tags.show', compact('tag', 'posts'));
     }
 
-    public function create($forumId)
+    public function create()
     {
-        $forum = Forum::findOrFail($forumId);
         $tags = Tag::all();
-    
-        return view('posts.create', compact('forum', 'tags'));
+        return view('posts.create', compact('tags'));
+    }
+
+    public function store(Request $request, Forum $forum)
+    {
+        $this->authorize('create', Post::class);
+
+        $request->validate([
+            'title' => 'required|max:255',
+            'body' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $post = $forum->posts()->create([
+            'title' => $request->title,
+            'body' => $request->body,
+            'user_id' => auth()->id(),
+        ]);
+
+        // Add tags to the post
+        $tags = $request->input('tags');
+        if ($tags) {
+            $tagIds = collect($tags)->map(function ($tag) {
+                return Tag::firstOrCreate(['name' => $tag])->id;
+            });
+
+            $post->tags()->sync($tagIds);
+        }
+
+        return redirect()->route('posts.show', [$forum, $post])->with('success', 'Post created successfully.');
     }
 }

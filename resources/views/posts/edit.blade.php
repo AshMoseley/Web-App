@@ -46,6 +46,14 @@
             @endif
         </div>
     </div>
+    <div class="mb-4">
+    <label for="tags" class="block text-gray-700 font-bold mb-2">Tags</label>
+    <select name="tags[]" id="tags" multiple class="form-multiselect block rounded-md shadow-sm">
+        @foreach($tags as $tag)
+        <option value="{{ $tag->id }}" @if(in_array($tag->id, $post->tags->pluck('id')->toArray())) selected @endif>{{ $tag->name }}</option>
+        @endforeach
+    </select>
+</div>
     <button type="submit" class="bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded-md">Update Post</button>
 </form>
 @endsection

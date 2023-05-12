@@ -1,14 +1,26 @@
+<style>
+  .post-background {
+    background: #222; 
+    background-size: cover;
+    background-position: center center;
+    color: #fff;
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
+</style>
+
+
 @extends('layouts.app')
 
 @section('content')
-<div class="bg-white p-6 rounded-lg shadow-lg max-w-xl mx-auto">
+
     <div class="bg-primary">
         <div class="container py-4">
             <div class="max-w-4xl mx-auto">
-                <div class="bg-secondary rounded-lg shadow-lg">
-                    <div class="card-header bg-gray-200 py-3">
+            <div class="bg-black p-6 rounded-lg shadow-lg max-w-1xl mx-auto">
+                <div class="bg-white p-6 rounded-lg shadow-lg max-w-1xl mx-auto">
                         <h1 class="text-2xl font-semibold">{{ $post->title }}</h1>
-                    </div>
+                        <div class="text-gray-600">{{ __('By') }} {{ $post->user->name }}</div>
                     <div class="card-body">
                         <p class="text-lg">{{ $post->body }}</p>
                         @if($post->image)
@@ -36,15 +48,12 @@
                         @endcan
                     </div>
                 </div>
-                <div class="bg-gray-200 py-3 mt-4 rounded-lg shadow-lg comment-meta">
-                    <h3 class="text-lg">{{ __('Comments') }}</h3>
-                </div>
-
-                <div class="bg-secondary py-4 px-4 mt-4 rounded-lg shadow-lg">
+                <div class="bg-white p-6 rounded-lg shadow-lg max-w-1xl mx-auto">
                     <livewire:livecomment :post="$post" />
                 </div>
+</div>
             </div>
         </div>
-    </div>
 </div>
+    </div>
 @endsection

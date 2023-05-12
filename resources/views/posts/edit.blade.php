@@ -50,13 +50,17 @@
         </div>
     </div>
     <div class="mb-4">
-    <label for="tags" class="block text-gray-700 font-bold mb-2">Tags</label>
-    <select name="tags[]" id="tags" multiple class="form-multiselect block rounded-md shadow-sm">
+    <label for="tags" class="block text-gray-700 font-bold mb-2">{{ __('Tags') }}</label>
+    <select id="tags" name="tags[]" class="form-input w-full @error('tags') border-red-500 @enderror" multiple>
         @foreach($tags as $tag)
-        <option value="{{ $tag->id }}" @if(in_array($tag->id, $post->tags->pluck('id')->toArray())) selected @endif>{{ $tag->name }}</option>
+        <option value="{{ $tag->id }}" {{ $post->tags->contains($tag->id) ? 'selected' : '' }}>{{ $tag->name }}</option>
         @endforeach
     </select>
+    @error('tags')
+    <p class="text-red-500 text-xs italic">{{ $message }}</p>
+    @enderror
 </div>
+
     <button type="submit" class="bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded-md">Update Post</button>
 </form>
 </div>

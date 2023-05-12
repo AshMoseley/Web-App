@@ -1,12 +1,11 @@
 <style>
-    .forum-background {
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0) 100%), url('/images/forum-background.jpg');
-        background-size: cover;
-        background-position: center center;
-        color: #fff;
-        /* add this line to change the text color */
-        text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-    }
+  .forum-background {
+    background: #222; 
+    background-size: cover;
+    background-position: center center;
+    color: #fff;
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
 
 
     /* .card {

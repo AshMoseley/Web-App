@@ -128,22 +128,24 @@ class PostController extends Controller
     public function update(Request $request, Forum $forum, Post $post)
     {
         $this->authorize('update', $post);
-
+    
         $request->validate([
             'title' => 'required|max:255',
             'body' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'remove_image' => 'nullable|boolean'
+            'remove_image' => 'nullable|boolean',
+            'tags' => 'nullable|array'
         ]);
-
+    
         $post->title = $request->input('title');
         $post->body = $request->input('body');
-
+        $post->tags()->sync($request->input('tags'));
+    
         if ($request->hasFile('image')) {
             if ($post->image && file_exists(public_path('images/' . $post->image))) {
                 unlink(public_path('images/' . $post->image));
             }
-
+    
             $image = $request->file('image');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->storeAs('images', $imageName, 'public');
@@ -152,15 +154,16 @@ class PostController extends Controller
             if ($post->image && file_exists(public_path('images/' . $post->image))) {
                 unlink(public_path('images/' . $post->image));
             }
-
+    
             $post->image = null;
         }
-
+    
         $post->save();
-
+    
         return redirect()->route('posts.show', ['forum' => $forum->id, 'post' => $post->id])
             ->with('success', 'Post updated successfully.');
     }
+    
 
 
 

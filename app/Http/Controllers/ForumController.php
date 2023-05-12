@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Forum;
 use App\Policies\ForumPolicy;
+use Illuminate\Auth\Middleware\AdminMiddleware as Middleware;
 
 class ForumController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *

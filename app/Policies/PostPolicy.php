@@ -19,7 +19,7 @@ class PostPolicy
      */
     public function view(User $user, Post $post)
     {
-        return true; // anyone can view a post
+        return true;
     }
 
     /**
@@ -42,7 +42,7 @@ class PostPolicy
      */
     public function update(User $user, Post $post)
     {
-        return $user->isAdmin() || $post->user_id == $user->id; // only admin users or the post's creator can update a post
+        return $user->isAdmin() || $post->user_id == $user->id; 
     }
 
     /**
@@ -54,6 +54,6 @@ class PostPolicy
      */
     public function delete(User $user, Post $post)
     {
-        return $user->isAdmin() || $post->user_id == $user->id; // only admin users or the post's creator can delete a post
+        return $user->isAdmin() || $post->user_id == $user->id; 
     }
 }

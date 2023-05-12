@@ -1,0 +1,27 @@
+.comment-item {
+    position: relative;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .comment-item .comment-body {
+    margin-bottom: 10px;
+  }
+  
+  .comment-item .comment-meta {
+    font-size: 12px;
+    color: #888;
+  }
+  
+  .comment-item .edit-delete-btns {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+  
+  .comment-item .edit-delete-btns .btn {
+    margin-left: 5px;
+  }
+  

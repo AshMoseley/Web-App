@@ -1,8 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="text-3xl font-bold mb-4">Edit Post</h1>
-<form action="{{ route('posts.update', [$forum, $post]) }}" method="POST" enctype="multipart/form-data" class="max-w-lg">
+<div class="flex justify-center">
+  <h1 class="text-3xl font-bold mb-4">Edit Post</h1>
+</div>
+<div class="bg-white p-6 rounded-lg shadow-lg max-w-lg mx-auto">
+<form action="{{ route('posts.update', [$forum, $post]) }}" method="POST" enctype="multipart/form-data" class="max-w-lg mx-auto">
     @csrf
     @method('PUT')
     <div class="mb-4">
@@ -56,6 +59,7 @@
 </div>
     <button type="submit" class="bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded-md">Update Post</button>
 </form>
+</div>
 @endsection
 
 

@@ -1,186 +1,87 @@
-/* Styles for the primary background */
-.bg-primary {
-  display: flex;
-  justify-content: center;
-}
-
-/* Styles for a column with a maximum width of 800 pixels */
-.col-md-8 {
-  max-width: 800px;
-}
-
-/* Styles for the secondary background */
-.bg-secondary {
-  display:
-  flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  max-width: 800px;
-  margin: 0 auto;
-  }
-  
-  /* Styles for the card body within the secondary background */
-  .bg-secondary .card-body {
-  text-align: left;
-  }
-  
-  /* Styles for a gray background */
-  .bg-gray-200 {
-  display: flex;
-  justify-content: center;
-  }
-  
-  /* Styles for vertical padding of 1rem */
-  .py-3 {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  }
-  
-  /* Styles for vertical padding of 1.5rem */
-  .py-4 {
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-  }
-  
-  /* Styles for horizontal padding of 1.5rem */
-  .px-4 {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  }
-  
-  /* Styles for a comment box */
-  .comment-box {
-  border: 1px solid #ccc;
-  margin-bottom: 10px;
-  padding: 10px;
-  }
-  
-  /* Styles for comment text */
-  .comment-text {
-  margin-bottom: 5px;
-  font-weight: bold;
-  }
-  
-  /* Styles for comment meta */
-  .comment-meta {
-  font-size: 14px;
-  color: #555;
-  }
-  
-  /* Styles for comment author */
-  .comment-author {
-  font-weight: bold;
-  margin-right: 5px;
-  }
-  
-  /* Styles for comment time */
-  .comment-time {
-  font-style: italic;
-  }
-  /* Styles for a form group */
-.form-group {
-  margin-bottom: 1rem;
-  }
-  
-  /* Styles for a form label */
-  .form-label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  }
-  
-  /* Styles for a form input */
-  .form-input {
-  display: block;
-  width: 100%;
-  padding: 0.5rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #555;
+/* Set default font family and size */
+body {
   background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #ccc;
-  border-radius: 0.25rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  }
-  
-  /* Styles for a form input when it is focused */
-  .form-input:focus {
-  outline: none;
-  border-color: #4d90fe;
-  box-shadow: 0 0 0 0.2rem rgba(77, 144, 254, 0.25);
-  }
-  
-  /* Styles for a form input with an error */
-  .form-input-error {
-  border-color: #dc3545;
-  }
-  
-  /* Styles for a form input error message */
-  .form-input-error-message {
-  display: block;
-  margin-top: 0.25rem;
-  font-size: 0.875rem;
-  color: #dc3545;
-  }
-  
-  /* Styles for a form button */
-  .form-button {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+}
+
+/* Style the post container */
+.post {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Style the post title */
+.post-title {
+  font-size: 24px;
   font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Style the post meta information */
+.post-meta {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+/* Style the post content */
+.post-content {
+  font-size: 18px;
   line-height: 1.5;
-  color: #fff;
-  background-color: #007bff;
-  border: 1px solid #007bff;
-  border-radius: 0.25rem;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-  border-color 0.15s ease-in-out;
-  }
-  
-  /* Styles for a form button when it is hovered */
-  .form-button:hover {
-  color: #fff;
-  background-color: #0069d9;
-  border-color: #0062cc;
-  }
-  
-  /* Styles for a form button when it is active */
-  .form-button:active {
-  color: #fff;
-  background-color: #0062cc;
-  border-color: #005cbf;
-  }
-  
-  /* Styles for a form button when it is disabled */
-  .form-button:disabled {
-  color: #fff;
-  background-color: #6c757d;
-  border-color: #6c757d;
-  }
-  
-  /* Styles for a form button with an error */
-  .form-button-error {
-  background-color: #dc3545;
-  border-color: #dc3545;
-  }
-  
-  /* Styles for a form button with an error when it is hovered */
-  .form-button-error:hover {
-  background-color: #c82333;
-  border-color: #bd2130;
-  }
-  
-  /* Styles for a form button with an error when it is active */
-  .form-button-error:active {
-  background-color: #bd2130;
-  border-color: #b21f2d;
-  }
-  
-  /* Styles for a form button with an error when it is disabled */
-  .form-button-error:disabled {
-  background-color: #6c757d;
-  border-color: #6c757d;
-  }
+}
+
+/* Style links in the post content */
+.post-content a {
+  color: #007bff;
+}
+
+/* Style images in the post content */
+.post-content img {
+  max-width: 100%;
+  height: auto;
+  margin: 10px 0;
+}
+
+/* Style blockquotes in the post content */
+.post-content blockquote {
+  border-left: 5px solid #ccc;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+/* Style code blocks in the post content */
+.post-content pre {
+  background-color: #f5f5f5;
+  padding: 10px;
+  overflow-x: auto;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+/* Style code snippets in the post content */
+.post-content code {
+  background-color: #f5f5f5;
+  padding: 2px 5px;
+  border-radius: 5px;
+  font-family: monospace;
+  font-size: 16px;
+}
+
+/* Style inline code snippets in the post content */
+.post-content code.inline {
+  background-color: #f5f5f5;
+  padding: 2px 5px;
+  border-radius: 5px;
+  font-family: monospace;
+  font-size: 16px;
+}
+
+.comment-meta {
+  color: #777;
+  font-size: 14px;
+  font-style: italic;
+}
+

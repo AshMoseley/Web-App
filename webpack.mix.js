@@ -9,4 +9,5 @@ mix.js("resources/js/app.js", "public/js")
      require("tailwindcss"),
     ])
     .postCss('resources/css/forum.css', 'public/css')
-    .postCss('resources/css/post-show.css', 'public/css');
+    .postCss('resources/css/post-show.css', 'public/css')
+    .postCss('resources/css/comments.css', 'public/css');

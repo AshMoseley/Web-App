@@ -32,7 +32,7 @@ class CommentPolicy
      */
     public function update(User $user, Comment $comment)
     {
-        return $user->isAdmin() || $comment->user_id == $user->id; // only admin users or the comment's creator can update a comment
+        return $user->isAdmin() || $comment->user_id == $user->id; 
     }
 
     /**
@@ -44,6 +44,6 @@ class CommentPolicy
      */
     public function delete(User $user, Comment $comment)
     {
-        return $user->isAdmin() || $comment->user_id == $user->id; // only admin users or the comment's creator can delete a comment
+        return $user->isAdmin() || $comment->user_id == $user->id; 
     }
 }

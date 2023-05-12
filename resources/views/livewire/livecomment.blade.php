@@ -4,9 +4,9 @@
         <p class="text-lg">{{ __('Comment by') }} <a href="{{ route('users.posts', $comment->user) }}" class="text-blue-500 hover:underline">{{ $comment->user->name }}</a> {{ __('on') }} {{ $comment->created_at->format('M d, Y') }}</p>
         <p class="text-lg">{{ $comment->body }}</p>
         @can('delete', $comment)
-        <div class="btn-group">
+        <div class="flex">
             @can('update', $comment)
-            <a href="{{ route('comments.edit',['forum' => $post->forum->id, 'post' => $post->id, 'comment' => $comment->id]) }}" class="btn btn-sm btn-primary">{{ __('Edit') }}</a>
+            <a href="{{ route('comments.edit',['forum' => $post->forum->id, 'post' => $post->id, 'comment' => $comment->id]) }}" class="btn btn-sm btn-primary mr-2">{{ __('Edit') }}</a>
             @endcan
             <form action="{{ route('comments.destroy', ['forum' => $post->forum->id, 'post' => $post->id, 'comment' => $comment->id]) }}" method="POST">
                 {{ csrf_field() }}

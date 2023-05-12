@@ -13,8 +13,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/forum.css') }}">
-    <!-- <link href="{{ asset('css/post-show.css') }}" rel="stylesheet"> -->
+    <link href="{{ asset('css/forum.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/post-show.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/comments.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
